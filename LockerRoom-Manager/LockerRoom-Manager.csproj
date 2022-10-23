@@ -75,12 +75,6 @@
     <Compile Include="adminWindow.Designer.cs">
       <DependentUpon>adminWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="LockerPropertiesWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LockerPropertiesWindow.Designer.cs">
-      <DependentUpon>LockerPropertiesWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="LockerPropertiesAdminWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,37 +82,13 @@
       <DependentUpon>LockerPropertiesAdminWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Locker.cs" />
-    <Compile Include="newUserWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="newUserWindow.Designer.cs">
-      <DependentUpon>newUserWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="userListWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="userListWindow.Designer.cs">
-      <DependentUpon>userListWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoginUser.cs" />
     <Compile Include="DatabaseManager.cs" />
-    <Compile Include="userWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="userWindow.Designer.cs">
-      <DependentUpon>userWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="loginWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="loginWindow.Designer.cs">
-      <DependentUpon>loginWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="adminWindow.resx">
@@ -128,25 +98,10 @@
     <EmbeddedResource Include="LockerPropertiesAdminWindow.resx">
       <DependentUpon>LockerPropertiesAdminWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LockerPropertiesWindow.resx">
-      <DependentUpon>LockerPropertiesWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="newUserWindow.resx">
-      <DependentUpon>newUserWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="loginWindow.resx">
-      <DependentUpon>loginWindow.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="userListWindow.resx">
-      <DependentUpon>userListWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="userWindow.resx">
-      <DependentUpon>userWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -103,7 +103,6 @@ namespace LockerRoom_Manager
             this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.newLockerButton = new System.Windows.Forms.Button();
-            this.userList = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -138,9 +137,10 @@ namespace LockerRoom_Manager
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.ForeColor = System.Drawing.Color.Snow;
-            this.panel1.Location = new System.Drawing.Point(219, 48);
+            this.panel1.Location = new System.Drawing.Point(292, 59);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1229, 761);
+            this.panel1.Size = new System.Drawing.Size(1638, 936);
             this.panel1.TabIndex = 12;
             // 
             // label1
@@ -149,9 +149,10 @@ namespace LockerRoom_Manager
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.label1.Font = new System.Drawing.Font("Bahnschrift Condensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(41, 2);
+            this.label1.Location = new System.Drawing.Point(55, 2);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 35);
+            this.label1.Size = new System.Drawing.Size(212, 45);
             this.label1.TabIndex = 11;
             this.label1.Text = "ADMINISTRATOR";
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -163,9 +164,10 @@ namespace LockerRoom_Manager
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(6, 764);
+            this.button3.Location = new System.Drawing.Point(8, 940);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(78, 45);
+            this.button3.Size = new System.Drawing.Size(104, 55);
             this.button3.TabIndex = 28;
             this.button3.Text = "Exit";
             this.button3.UseVisualStyleBackColor = false;
@@ -177,27 +179,14 @@ namespace LockerRoom_Manager
             this.newLockerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newLockerButton.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.newLockerButton.ForeColor = System.Drawing.Color.White;
-            this.newLockerButton.Location = new System.Drawing.Point(6, 48);
+            this.newLockerButton.Location = new System.Drawing.Point(8, 59);
+            this.newLockerButton.Margin = new System.Windows.Forms.Padding(4);
             this.newLockerButton.Name = "newLockerButton";
-            this.newLockerButton.Size = new System.Drawing.Size(207, 45);
+            this.newLockerButton.Size = new System.Drawing.Size(276, 55);
             this.newLockerButton.TabIndex = 27;
             this.newLockerButton.Text = "New locker";
             this.newLockerButton.UseVisualStyleBackColor = false;
             this.newLockerButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // userList
-            // 
-            this.userList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(85)))), ((int)(((byte)(100)))));
-            this.userList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userList.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.userList.ForeColor = System.Drawing.Color.White;
-            this.userList.Location = new System.Drawing.Point(90, 764);
-            this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(123, 45);
-            this.userList.TabIndex = 26;
-            this.userList.Text = "Users list";
-            this.userList.UseVisualStyleBackColor = false;
-            this.userList.Click += new System.EventHandler(this.userList_Click);
             // 
             // label2
             // 
@@ -205,9 +194,10 @@ namespace LockerRoom_Manager
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(59)))), ((int)(((byte)(70)))));
             this.label2.Font = new System.Drawing.Font("Bahnschrift Condensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(67, 181);
+            this.label2.Location = new System.Drawing.Point(89, 223);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 35);
+            this.label2.Size = new System.Drawing.Size(113, 45);
             this.label2.TabIndex = 29;
             this.label2.Text = "SEARCH";
             // 
@@ -219,11 +209,12 @@ namespace LockerRoom_Manager
             this.nameBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(69)))), ((int)(((byte)(82)))));
             this.nameBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.nameBox.ForeColor = System.Drawing.Color.Transparent;
-            this.nameBox.Location = new System.Drawing.Point(6, 219);
+            this.nameBox.Location = new System.Drawing.Point(8, 270);
+            this.nameBox.Margin = new System.Windows.Forms.Padding(4);
             this.nameBox.MaxLength = 24;
             this.nameBox.Multiline = true;
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(207, 38);
+            this.nameBox.Size = new System.Drawing.Size(275, 46);
             this.nameBox.TabIndex = 41;
             this.nameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nameBox.TextChanged += new System.EventHandler(this.nameBox_TextChanged);
@@ -235,10 +226,11 @@ namespace LockerRoom_Manager
             this.listBox1.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.listBox1.ForeColor = System.Drawing.Color.White;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 19;
-            this.listBox1.Location = new System.Drawing.Point(6, 263);
+            this.listBox1.ItemHeight = 24;
+            this.listBox1.Location = new System.Drawing.Point(8, 324);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(207, 460);
+            this.listBox1.Size = new System.Drawing.Size(275, 556);
             this.listBox1.TabIndex = 42;
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
@@ -248,9 +240,10 @@ namespace LockerRoom_Manager
             this.ImportBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ImportBackup.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ImportBackup.ForeColor = System.Drawing.Color.White;
-            this.ImportBackup.Location = new System.Drawing.Point(6, 131);
+            this.ImportBackup.Location = new System.Drawing.Point(8, 161);
+            this.ImportBackup.Margin = new System.Windows.Forms.Padding(4);
             this.ImportBackup.Name = "ImportBackup";
-            this.ImportBackup.Size = new System.Drawing.Size(99, 33);
+            this.ImportBackup.Size = new System.Drawing.Size(132, 41);
             this.ImportBackup.TabIndex = 43;
             this.ImportBackup.Text = "Import backup";
             this.ImportBackup.UseVisualStyleBackColor = false;
@@ -262,9 +255,10 @@ namespace LockerRoom_Manager
             this.ExportBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExportBackup.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ExportBackup.ForeColor = System.Drawing.Color.White;
-            this.ExportBackup.Location = new System.Drawing.Point(114, 131);
+            this.ExportBackup.Location = new System.Drawing.Point(152, 161);
+            this.ExportBackup.Margin = new System.Windows.Forms.Padding(4);
             this.ExportBackup.Name = "ExportBackup";
-            this.ExportBackup.Size = new System.Drawing.Size(99, 33);
+            this.ExportBackup.Size = new System.Drawing.Size(132, 41);
             this.ExportBackup.TabIndex = 44;
             this.ExportBackup.Text = "Export backup";
             this.ExportBackup.UseVisualStyleBackColor = false;
@@ -274,9 +268,10 @@ namespace LockerRoom_Manager
             // 
             this.pictureBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(59)))), ((int)(((byte)(70)))));
             this.pictureBox7.Image = global::LockerRoom_Manager.Properties.Resources.export_icon;
-            this.pictureBox7.Location = new System.Drawing.Point(149, 99);
+            this.pictureBox7.Location = new System.Drawing.Point(199, 122);
+            this.pictureBox7.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(26, 26);
+            this.pictureBox7.Size = new System.Drawing.Size(35, 32);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox7.TabIndex = 46;
             this.pictureBox7.TabStop = false;
@@ -285,9 +280,10 @@ namespace LockerRoom_Manager
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(59)))), ((int)(((byte)(70)))));
             this.pictureBox6.Image = global::LockerRoom_Manager.Properties.Resources.import_icon;
-            this.pictureBox6.Location = new System.Drawing.Point(46, 99);
+            this.pictureBox6.Location = new System.Drawing.Point(61, 122);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(26, 26);
+            this.pictureBox6.Size = new System.Drawing.Size(35, 32);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox6.TabIndex = 45;
             this.pictureBox6.TabStop = false;
@@ -296,9 +292,10 @@ namespace LockerRoom_Manager
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.pictureBox5.Image = global::LockerRoom_Manager.Properties.Resources._140351;
-            this.pictureBox5.Location = new System.Drawing.Point(10, 8);
+            this.pictureBox5.Location = new System.Drawing.Point(13, 10);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox5.Size = new System.Drawing.Size(33, 31);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 9;
             this.pictureBox5.TabStop = false;
@@ -308,9 +305,10 @@ namespace LockerRoom_Manager
             // pictureBox4
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(27)))), ((int)(((byte)(36)))));
-            this.pictureBox4.Location = new System.Drawing.Point(-2, 39);
+            this.pictureBox4.Location = new System.Drawing.Point(-3, 48);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(1502, 3);
+            this.pictureBox4.Size = new System.Drawing.Size(2003, 4);
             this.pictureBox4.TabIndex = 8;
             this.pictureBox4.TabStop = false;
             // 
@@ -318,9 +316,10 @@ namespace LockerRoom_Manager
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.pictureBox3.Image = global::LockerRoom_Manager.Properties.Resources.x_close_icon_white;
-            this.pictureBox3.Location = new System.Drawing.Point(1439, 0);
+            this.pictureBox3.Location = new System.Drawing.Point(1914, 2);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox3.Size = new System.Drawing.Size(27, 25);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 7;
             this.pictureBox3.TabStop = false;
@@ -332,9 +331,10 @@ namespace LockerRoom_Manager
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.pictureBox2.Image = global::LockerRoom_Manager.Properties.Resources.winfo_icon_minimize_64;
-            this.pictureBox2.Location = new System.Drawing.Point(1413, 0);
+            this.pictureBox2.Location = new System.Drawing.Point(1879, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox2.Size = new System.Drawing.Size(27, 25);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
@@ -345,9 +345,10 @@ namespace LockerRoom_Manager
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.pictureBox1.Location = new System.Drawing.Point(-2, -1);
+            this.pictureBox1.Location = new System.Drawing.Point(-3, -1);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1487, 43);
+            this.pictureBox1.Size = new System.Drawing.Size(1983, 53);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -359,10 +360,10 @@ namespace LockerRoom_Manager
             // 
             // adminWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(59)))), ((int)(((byte)(70)))));
-            this.ClientSize = new System.Drawing.Size(1460, 821);
+            this.ClientSize = new System.Drawing.Size(1942, 1010);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.ExportBackup);
@@ -372,7 +373,6 @@ namespace LockerRoom_Manager
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.newLockerButton);
-            this.Controls.Add(this.userList);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox5);
@@ -382,6 +382,7 @@ namespace LockerRoom_Manager
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "adminWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
@@ -412,7 +413,6 @@ namespace LockerRoom_Manager
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button newLockerButton;
-        private System.Windows.Forms.Button userList;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox nameBox;
         private System.Windows.Forms.ListBox listBox1;

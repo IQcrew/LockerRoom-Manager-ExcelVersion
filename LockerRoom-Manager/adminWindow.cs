@@ -22,11 +22,11 @@ namespace LockerRoom_Manager
 
         public List<int> openLockerTabs = new List<int>();
 
-        Form userListForm = new userListWindow();
+
         public adminWindow()
         {
             InitializeComponent();
-            userListForm.Owner = this;
+            DatabaseManager.SetUp();
             DatabaseManager.RefreshLockersData();
             foreach  (Locker lckr in DatabaseManager.LockersList){this.printNewLocker(lckr.ID,lckr.Coords, lckr.NameOfHolder =="" && lckr.HolderClass == ""); }
             nameBox_TextChanged(null, null);
@@ -36,12 +36,6 @@ namespace LockerRoom_Manager
             openFileDialog1.AddExtension = true;
         }
 
-        private void userList_Click(object sender, EventArgs e)
-        {
-            userListForm.Show();
-            this.Hide();
-            return;
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {

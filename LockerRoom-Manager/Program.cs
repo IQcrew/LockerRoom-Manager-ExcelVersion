@@ -16,7 +16,7 @@ namespace LockerRoom_Manager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new loginWindow());
+            Application.Run(new adminWindow());
         }
     }
 }
