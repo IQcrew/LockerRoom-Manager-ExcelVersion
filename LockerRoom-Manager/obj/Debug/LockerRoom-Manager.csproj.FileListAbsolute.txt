@@ -89,3 +89,10 @@ C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-M
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Debug\LockerRoom-Manager.csproj.CopyComplete
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Debug\LockerRoom-Manager.exe
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Debug\LockerRoom-Manager.pdb
+C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Debug\LockerRoom-Manager.csproj.ResolveComReference.cache
+C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\bin\Debug\EPPlus.dll
+C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\bin\Debug\EPPlus.Interfaces.dll
+C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\bin\Debug\EPPlus.System.Drawing.dll
+C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\bin\Debug\EPPlus.xml
+C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml

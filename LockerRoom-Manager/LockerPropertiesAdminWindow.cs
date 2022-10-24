@@ -24,7 +24,7 @@ namespace LockerRoom_Manager
         {
             main = this.Owner as adminWindow;
             main.openLockerTabs.Add(originalID);
-            lckr = DatabaseManager.FindLocker(originalID);
+            lckr = dataManager.FindLocker(originalID);
             idBox.Text = lckr.ID.ToString();
             nameBox.Text = lckr.NameOfHolder;
             classBox.Text = lckr.HolderClass;
@@ -36,24 +36,24 @@ namespace LockerRoom_Manager
                 main.LockerState(lckr.ID, nameBox.Text == "" && classBox.Text == "");
                 lckr.NameOfHolder = nameBox.Text;
                 lckr.HolderClass = classBox.Text;
-                DatabaseManager.UpdateLocker(lckr);
+                dataManager.UpdateLocker(lckr);
                 main.openLockerTabs.Remove(originalID);
                 main.nameBox_TextChanged(null, null);
                 this.Close();
             }
             else
             {
-                if (DatabaseManager.FindLocker(Int32.Parse(idBox.Text)) == null)
+                if (dataManager.FindLocker(Int32.Parse(idBox.Text)) == null)
                 {
                     main.openLockerTabs.Remove(originalID);
                     main.nameBox_TextChanged(null, null);
-                    DatabaseManager.DeleteLocker(lckr.ID);
+                    dataManager.DeleteLocker(lckr.ID);
                     main.earseLocker(lckr.ID);
                     lckr.NameOfHolder = nameBox.Text;
                     lckr.HolderClass = classBox.Text;
                     lckr.ID = Int32.Parse(idBox.Text);
                     main.printNewLocker(lckr.ID, lckr.Coords, nameBox.Text == "" && classBox.Text == "");
-                    DatabaseManager.CreateLocker(lckr);
+                    dataManager.CreateLocker(lckr);
                     main.LockerState(lckr.ID, nameBox.Text == "" && classBox.Text == "");
                     this.Close();
                 }
@@ -67,7 +67,7 @@ namespace LockerRoom_Manager
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             main.earseLocker(lckr.ID);
-            DatabaseManager.DeleteLocker(lckr.ID);
+            dataManager.DeleteLocker(lckr.ID);
             main.openLockerTabs.Remove(originalID);
             this.Close();
         }
