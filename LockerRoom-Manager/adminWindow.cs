@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.IO;
 using Microsoft.Vbe.Interop;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace LockerRoom_Manager
 {
@@ -29,8 +30,8 @@ namespace LockerRoom_Manager
         public adminWindow()
         {
             InitializeComponent();
-            dataManager.SetUp();
-            dataManager.RefreshLockersData();
+            //dataManager.SetUp();
+            dataManager.newRefreshLockersData();
             foreach  (Locker lckr in dataManager.LockersList){this.printNewLocker(lckr.ID,lckr.Coords, lckr.NameOfHolder =="" && lckr.HolderClass == ""); }
             nameBox_TextChanged(null, null);
             saveFileDialog1.Filter = "Data Files (*.xlsx)|*.xlsx";
@@ -161,11 +162,19 @@ namespace LockerRoom_Manager
             {
                 openFileDialog1.ShowDialog();
                 string backup = File.OpenText(openFileDialog1.FileName).ReadToEnd();
-                dataManager.setBackup(backup);
-                this.Controls.Clear();
-                this.InitializeComponent();
-                foreach (Locker lckr in dataManager.LockersList) { this.printNewLocker(lckr.ID, lckr.Coords, lckr.NameOfHolder == "" && lckr.HolderClass == ""); }
-                nameBox_TextChanged(null, null);
+                var package = new ExcelPackage(openFileDialog1.FileName);
+                var wb = package.Workbook;
+                var ws = wb.Worksheets[0];
+                if (ws.Cells[1,1].Value.ToString() != "Locker_Room_File") { return; }
+                for (int i = 4; i <= ws.Dimension.Rows; i++)
+                {
+                    Locker tempLocker = new Locker(Int32.Parse(ws.Cells[i, 1].Value.ToString()), Array.ConvertAll(ws.Cells[i, 4].Value.ToString().Split(','), Int32.Parse));
+                    tempLocker.NameOfHolder = ws.Cells[i, 2].Value.ToString();
+                    tempLocker.HolderClass = ws.Cells[i, 3].Value.ToString();
+                    dataManager.LockersList.Add(tempLocker);
+                    this.printNewLocker(tempLocker.ID, tempLocker.Coords, tempLocker.NameOfHolder == "" && tempLocker.HolderClass == "");
+                }
+
             }
             catch { }
         }
@@ -183,9 +192,21 @@ namespace LockerRoom_Manager
                 var ws = wb.Worksheets[0];
 
                 ws.Cells[1, 1].Value = "Locker_Room_File";
+                ws.Cells[2, 1].Value = "";
+                ws.Cells[3, 1].Value = "Čislo";
+                ws.Cells[3, 2].Value = "Meno";
+                ws.Cells[3, 3].Value = "Trieda";
+                ws.Cells[3, 4].Value = "Suradnice";
+                
+                ws.Cells[1, 1, 3, 7].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                ws.Cells[1, 1, 3, 7].Style.Font.Bold = true;
+
                 ws.Cells["A1:D1"].Merge = true;
                 ws.Cells["A1:D1"].Style.Locked = true;
+                ws.Cells["A2:D2"].Merge = true;
+                ws.Cells["A2:D2"].Style.Locked = true;
                 ws.Columns[2].Width = 25;
+                ws.Columns[4].Width = 11;
 
                 for (int i = 0; i < dataManager.LockersList.Count; i++)
                 {

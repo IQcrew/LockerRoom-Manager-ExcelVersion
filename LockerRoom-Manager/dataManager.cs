@@ -51,6 +51,7 @@ namespace LockerRoom_Manager
         //locker system
 
         public static List<Locker> LockersList = new List<Locker>();
+        public static List<LockerSheet> LockerSheets = new List<LockerSheet>();
         public static void RefreshLockersData()
         {
             FirebaseResponse res = client.Get("Lockers");
@@ -64,6 +65,11 @@ namespace LockerRoom_Manager
                     LockersList.Add(data[key]);
                 }
             }
+        }
+        public static void newRefreshLockersData()
+        {
+
+
         }
         public static void DeleteLocker(int id)
         {
