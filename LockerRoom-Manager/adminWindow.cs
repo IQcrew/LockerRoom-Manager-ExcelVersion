@@ -12,6 +12,7 @@ using System.IO;
 using Microsoft.Vbe.Interop;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using System.Net.Http.Headers;
 
 namespace LockerRoom_Manager
 {
@@ -162,18 +163,40 @@ namespace LockerRoom_Manager
             {
                 openFileDialog1.ShowDialog();
                 string backup = File.OpenText(openFileDialog1.FileName).ReadToEnd();
+                dataManager.LockerSheets.Clear();
+                dataManager.LockersList.Clear();
+                classBox.Items.Clear();
                 var package = new ExcelPackage(openFileDialog1.FileName);
                 var wb = package.Workbook;
-                var ws = wb.Worksheets[0];
-                if (ws.Cells[1,1].Value.ToString() != "Locker_Room_File") { return; }
-                for (int i = 4; i <= ws.Dimension.Rows; i++)
+                for (int x = 0; x < wb.Worksheets.Count; x++)
                 {
-                    Locker tempLocker = new Locker(Int32.Parse(ws.Cells[i, 1].Value.ToString()), Array.ConvertAll(ws.Cells[i, 4].Value.ToString().Split(','), Int32.Parse));
-                    tempLocker.NameOfHolder = ws.Cells[i, 2].Value.ToString();
-                    tempLocker.HolderClass = ws.Cells[i, 3].Value.ToString();
-                    dataManager.LockersList.Add(tempLocker);
-                    this.printNewLocker(tempLocker.ID, tempLocker.Coords, tempLocker.NameOfHolder == "" && tempLocker.HolderClass == "");
+                    var ws = wb.Worksheets[x];
+                    if (ws.Cells[1, 1].Value.ToString() != "Locker_Room_File") { continue; }
+                    LockerSheet tempSheet = new LockerSheet(ws.Cells[2, 1].Value.ToString());
+                    for (int i = 4; i <= ws.Dimension.Rows; i++)
+                    {
+                        Locker tempLocker = new Locker(Int32.Parse(ws.Cells[i, 1].Value.ToString()), Array.ConvertAll(ws.Cells[i, 4].Value.ToString().Split(','), Int32.Parse));
+                        tempLocker.NameOfHolder = ws.Cells[i, 2].Value.ToString();
+                        tempLocker.HolderClass = ws.Cells[i, 3].Value.ToString();
+                        tempSheet.lockers.Add(tempLocker);
+                    }
+                    classBox.Items.Add(tempSheet.Name);
+                    dataManager.LockerSheets.Add(tempSheet);
                 }
+                if (dataManager.LockerSheets.Count > 0)
+                {
+                    dataManager.LockersList = dataManager.LockerSheets[0].lockers;
+                    classBox.SelectedItem = dataManager.LockerSheets[0].Name;
+                    foreach (Locker tempLocker in dataManager.LockersList)
+                    {
+                        this.printNewLocker(tempLocker.ID, tempLocker.Coords, tempLocker.NameOfHolder == "" && tempLocker.HolderClass == "");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("There aren't any locker rooms");
+                }
+                
 
             }
             catch { }

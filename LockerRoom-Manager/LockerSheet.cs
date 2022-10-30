@@ -8,8 +8,9 @@ namespace LockerRoom_Manager
 {
     internal class LockerSheet
     {
-        public string Name { get; set; }
-        public List<Locker> lockers { get; set; }
+        public string Name;
+        public List<Locker> lockers = new List<Locker>();
+        
         public LockerSheet(string name)
         {
             Name = name;

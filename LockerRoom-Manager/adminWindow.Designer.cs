@@ -118,6 +118,8 @@ namespace LockerRoom_Manager
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.classBox = new System.Windows.Forms.ComboBox();
+            this.changeNameOfLockerRoom = new System.Windows.Forms.Button();
+            this.newRoom = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -224,7 +226,7 @@ namespace LockerRoom_Manager
             this.listBox1.ItemHeight = 19;
             this.listBox1.Location = new System.Drawing.Point(6, 263);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(207, 441);
+            this.listBox1.Size = new System.Drawing.Size(207, 403);
             this.listBox1.TabIndex = 42;
             // 
             // ImportBackup
@@ -352,10 +354,36 @@ namespace LockerRoom_Manager
             "Šatna 1",
             "Šatna 2",
             "Šatna 3"});
-            this.classBox.Location = new System.Drawing.Point(6, 710);
+            this.classBox.Location = new System.Drawing.Point(6, 666);
             this.classBox.Name = "classBox";
             this.classBox.Size = new System.Drawing.Size(207, 41);
             this.classBox.TabIndex = 48;
+            // 
+            // changeNameOfLockerRoom
+            // 
+            this.changeNameOfLockerRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(85)))), ((int)(((byte)(100)))));
+            this.changeNameOfLockerRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.changeNameOfLockerRoom.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.changeNameOfLockerRoom.ForeColor = System.Drawing.Color.White;
+            this.changeNameOfLockerRoom.Location = new System.Drawing.Point(6, 713);
+            this.changeNameOfLockerRoom.Name = "changeNameOfLockerRoom";
+            this.changeNameOfLockerRoom.Size = new System.Drawing.Size(118, 45);
+            this.changeNameOfLockerRoom.TabIndex = 49;
+            this.changeNameOfLockerRoom.Text = "Change name";
+            this.changeNameOfLockerRoom.UseVisualStyleBackColor = false;
+            // 
+            // newRoom
+            // 
+            this.newRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(85)))), ((int)(((byte)(100)))));
+            this.newRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.newRoom.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.newRoom.ForeColor = System.Drawing.Color.White;
+            this.newRoom.Location = new System.Drawing.Point(130, 713);
+            this.newRoom.Name = "newRoom";
+            this.newRoom.Size = new System.Drawing.Size(83, 45);
+            this.newRoom.TabIndex = 50;
+            this.newRoom.Text = "New room";
+            this.newRoom.UseVisualStyleBackColor = false;
             // 
             // adminWindow
             // 
@@ -363,6 +391,8 @@ namespace LockerRoom_Manager
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(59)))), ((int)(((byte)(70)))));
             this.ClientSize = new System.Drawing.Size(1455, 821);
+            this.Controls.Add(this.newRoom);
+            this.Controls.Add(this.changeNameOfLockerRoom);
             this.Controls.Add(this.classBox);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox6);
@@ -422,5 +452,7 @@ namespace LockerRoom_Manager
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ComboBox classBox;
+        private System.Windows.Forms.Button changeNameOfLockerRoom;
+        private System.Windows.Forms.Button newRoom;
     }
 }
