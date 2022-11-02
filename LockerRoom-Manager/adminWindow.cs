@@ -199,7 +199,9 @@ namespace LockerRoom_Manager
                 
 
             }
-            catch { }
+            catch(Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ExportBackup_Click(object sender, EventArgs e)
@@ -243,7 +245,7 @@ namespace LockerRoom_Manager
 
 
             }
-            catch { }
+            catch (Exception ex){ MessageBox.Show(ex.Message); }
         }
 
 
