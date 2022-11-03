@@ -185,6 +185,7 @@ namespace LockerRoom_Manager
                 }
                 if (dataManager.LockerSheets.Count > 0)
                 {
+                    dataManager.currentSheet = 0;
                     dataManager.LockersList = dataManager.LockerSheets[0].lockers;
                     classBox.SelectedItem = dataManager.LockerSheets[0].Name;
                     foreach (Locker tempLocker in dataManager.LockersList)
@@ -213,41 +214,59 @@ namespace LockerRoom_Manager
 
 
                 var wb = package.Workbook;
-                wb.Worksheets.Add("prva");
-                var ws = wb.Worksheets[0];
-
-                ws.Cells[1, 1].Value = "Locker_Room_File";
-                ws.Cells[2, 1].Value = "";
-                ws.Cells[3, 1].Value = "Čislo";
-                ws.Cells[3, 2].Value = "Meno";
-                ws.Cells[3, 3].Value = "Trieda";
-                ws.Cells[3, 4].Value = "Suradnice";
-                
-                ws.Cells[1, 1, 3, 7].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                ws.Cells[1, 1, 3, 7].Style.Font.Bold = true;
-
-                ws.Cells["A1:D1"].Merge = true;
-                ws.Cells["A1:D1"].Style.Locked = true;
-                ws.Cells["A2:D2"].Merge = true;
-                ws.Cells["A2:D2"].Style.Locked = true;
-                ws.Columns[2].Width = 25;
-                ws.Columns[4].Width = 11;
-
-                for (int i = 0; i < dataManager.LockersList.Count; i++)
+                for (int x = 0; x < dataManager.LockerSheets.Count; x++)
                 {
-                    Locker tempL = dataManager.LockersList[i];
-                    ws.Cells[i + 4, 1].Value = tempL.ID.ToString();
-                    ws.Cells[i + 4, 2].Value = tempL.NameOfHolder;
-                    ws.Cells[i + 4, 3].Value = tempL.HolderClass;
-                    ws.Cells[i + 4, 4].Value = tempL.Coords[0].ToString()+","+ tempL.Coords[1].ToString();
+
+
+                    wb.Worksheets.Add(dataManager.LockerSheets[x].Name);
+                    var ws = wb.Worksheets[x];
+
+                    ws.Cells[1, 1].Value = "Locker_Room_File";
+                    ws.Cells[2, 1].Value = dataManager.LockerSheets[x].Name;
+                    ws.Cells[3, 1].Value = "Čislo";
+                    ws.Cells[3, 2].Value = "Meno";
+                    ws.Cells[3, 3].Value = "Trieda";
+                    ws.Cells[3, 4].Value = "Suradnice";
+
+                    ws.Cells[1, 1, 3, 7].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    ws.Cells[1, 1, 3, 7].Style.Font.Bold = true;
+
+                    ws.Cells["A1:D1"].Merge = true;
+                    ws.Cells["A1:D1"].Style.Locked = true;
+                    ws.Cells["A2:D2"].Merge = true;
+                    ws.Cells["A2:D2"].Style.Locked = true;
+                    ws.Columns[2].Width = 25;
+                    ws.Columns[4].Width = 11;
+
+                    for (int i = 0; i < dataManager.LockersList.Count; i++)
+                    {
+                        Locker tempL = dataManager.LockersList[i];
+                        ws.Cells[i + 4, 1].Value = tempL.ID.ToString();
+                        ws.Cells[i + 4, 2].Value = tempL.NameOfHolder;
+                        ws.Cells[i + 4, 3].Value = tempL.HolderClass;
+                        ws.Cells[i + 4, 4].Value = tempL.Coords[0].ToString() + "," + tempL.Coords[1].ToString();
+                    }
                 }
                 package.SaveAs(saveFileDialog1.FileName);
-
+                
 
             }
-            catch (Exception ex){ MessageBox.Show(ex.Message); }
+            catch (Exception ex){ MessageBox.Show(ex.Message); }  // To do: saving to same file error
         }
 
+        private void changeNameOfLockerRoom_Click(object sender, EventArgs e)
+        {
+            if(dataManager.LockerSheets.Count < 1) { return; }
+            if (dataManager.LockerSheets.Any(x => x.Name == classBox.Text)){
+                MessageBox.Show("Name is already used"); return;
+            }
+            dataManager.LockerSheets[dataManager.currentSheet].Name = classBox.Text;
+            classBox.Items[dataManager.currentSheet] = classBox.Text;
+        }
+        private void newRoom_Click(object sender, EventArgs e)
+        {
+
+        }
 
 
         // WINDOW DESINGN
@@ -312,5 +331,6 @@ namespace LockerRoom_Manager
         {
             e.Handled = e.KeyChar == '\r';
         }
+
     }
 }
