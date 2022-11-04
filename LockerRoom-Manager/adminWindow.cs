@@ -13,6 +13,7 @@ using Microsoft.Vbe.Interop;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System.Net.Http.Headers;
+using Microsoft.Office.Interop.Excel;
 
 namespace LockerRoom_Manager
 {
@@ -33,7 +34,7 @@ namespace LockerRoom_Manager
             InitializeComponent();
             //dataManager.SetUp();
             dataManager.newRefreshLockersData();
-            foreach  (Locker lckr in dataManager.LockersList){this.printNewLocker(lckr.ID,lckr.Coords, lckr.NameOfHolder =="" && lckr.HolderClass == ""); }
+            //foreach  (Locker lckr in dataManager.LockerSheets[dataManager.currentSheet].lockers){this.printNewLocker(lckr.ID,lckr.Coords, lckr.NameOfHolder =="" && lckr.HolderClass == ""); }
             nameBox_TextChanged(null, null);
             saveFileDialog1.Filter = "Data Files (*.xlsx)|*.xlsx";
             saveFileDialog1.AddExtension = true;
@@ -102,8 +103,7 @@ namespace LockerRoom_Manager
 
         private bool possiblePos(int x, int y)
         {
-            
-            foreach (Locker lckr in dataManager.LockersList)
+            foreach (Locker lckr in dataManager.LockerSheets[dataManager.currentSheet].lockers)
             {
                 if ( selectedLabel.Text != lckr.ID.ToString() && Math.Abs(lckr.Coords[0] - x) <=39 && Math.Abs(lckr.Coords[1] - y) <= 89) { return false; }
             }
@@ -113,6 +113,7 @@ namespace LockerRoom_Manager
 
         private void createNewLocker()
         {
+            if (dataManager.LockerSheets.Count < 1) { return; }
             if (possiblePos(0, 0))
             {
                 Locker newLocker = dataManager.CreateLocker(new int[] {0,0});
@@ -135,7 +136,7 @@ namespace LockerRoom_Manager
         }
 
 
-        private void listBox1_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e, System.Windows.Forms.Cursor cursor)
+        private void listBox1_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             try
             {
@@ -151,8 +152,9 @@ namespace LockerRoom_Manager
 
         public void nameBox_TextChanged(object sender, EventArgs e)
         {
+            if (dataManager.LockerSheets.Count < 1) { return; }
             listBox1.Items.Clear();
-            foreach (Locker item in dataManager.LockersList)
+            foreach (Locker item in dataManager.LockerSheets[dataManager.currentSheet].lockers)
             {
                 if (item.NameOfHolder.ToLower().Contains(nameBox.Text.ToLower())){listBox1.Items.Add(item.ID.ToString() +" - "+item.NameOfHolder);}
             }
@@ -164,7 +166,6 @@ namespace LockerRoom_Manager
                 openFileDialog1.ShowDialog();
                 string backup = File.OpenText(openFileDialog1.FileName).ReadToEnd();
                 dataManager.LockerSheets.Clear();
-                dataManager.LockersList.Clear();
                 classBox.Items.Clear();
                 var package = new ExcelPackage(openFileDialog1.FileName);
                 var wb = package.Workbook;
@@ -186,12 +187,12 @@ namespace LockerRoom_Manager
                 if (dataManager.LockerSheets.Count > 0)
                 {
                     dataManager.currentSheet = 0;
-                    dataManager.LockersList = dataManager.LockerSheets[0].lockers;
                     classBox.SelectedItem = dataManager.LockerSheets[0].Name;
-                    foreach (Locker tempLocker in dataManager.LockersList)
+                    foreach (Locker tempLocker in dataManager.LockerSheets[dataManager.currentSheet].lockers)
                     {
                         this.printNewLocker(tempLocker.ID, tempLocker.Coords, tempLocker.NameOfHolder == "" && tempLocker.HolderClass == "");
                     }
+                    nameBox_TextChanged(null, null);
                 }
                 else
                 {
@@ -238,9 +239,9 @@ namespace LockerRoom_Manager
                     ws.Columns[2].Width = 25;
                     ws.Columns[4].Width = 11;
 
-                    for (int i = 0; i < dataManager.LockersList.Count; i++)
+                    for (int i = 0; i < dataManager.LockerSheets[dataManager.currentSheet].lockers.Count; i++)
                     {
-                        Locker tempL = dataManager.LockersList[i];
+                        Locker tempL = dataManager.LockerSheets[dataManager.currentSheet].lockers[i];
                         ws.Cells[i + 4, 1].Value = tempL.ID.ToString();
                         ws.Cells[i + 4, 2].Value = tempL.NameOfHolder;
                         ws.Cells[i + 4, 3].Value = tempL.HolderClass;
@@ -254,18 +255,58 @@ namespace LockerRoom_Manager
             catch (Exception ex){ MessageBox.Show(ex.Message); }  // To do: saving to same file error
         }
 
-        private void changeNameOfLockerRoom_Click(object sender, EventArgs e)
+
+        private void classBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(dataManager.LockerSheets.Count < 1) { return; }
-            if (dataManager.LockerSheets.Any(x => x.Name == classBox.Text)){
-                MessageBox.Show("Name is already used"); return;
-            }
-            dataManager.LockerSheets[dataManager.currentSheet].Name = classBox.Text;
-            classBox.Items[dataManager.currentSheet] = classBox.Text;
+            changeLockerRoom(classBox.SelectedIndex);
+            nameBox_TextChanged(null, null);
         }
         private void newRoom_Click(object sender, EventArgs e)
         {
+            if (dataManager.LockerSheets.Count < 1) { return; }
+            string name = "New locker room";
+            while(dataManager.LockerSheets.Any(x => x.Name == name))
+            {
+                name += "_";
+            }
+            dataManager.LockerSheets.Add(new LockerSheet(name));
+            changeLockerRoom(dataManager.LockerSheets.Count-1);
+            classBox.Items.Add(name);
+            classBox.SelectedItem = name;
 
+        }
+        private void deleteRoom_Click(object sender, EventArgs e)
+        {
+            if (dataManager.LockerSheets.Count < 1) { return; }
+            if (MessageBox.Show( "Do you really want to delete current locker room?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                dataManager.LockerSheets.RemoveAt(dataManager.currentSheet);
+                classBox.Items.RemoveAt(dataManager.currentSheet);
+                dataManager.currentSheet = dataManager.LockerSheets.Count>1 ? dataManager.currentSheet-1 : 0;
+
+            }
+        }
+        private void changeLockerRoom(int index)
+        {
+            if (dataManager.LockerSheets.Count < 1) { return; }
+            dataManager.currentSheet = index;
+            panel1.Controls.Clear();
+            foreach (Locker lck in dataManager.LockerSheets[dataManager.currentSheet].lockers)
+            {
+                this.printNewLocker(lck.ID, lck.Coords, lck.NameOfHolder == "" && lck.HolderClass == "");
+            }
+            
+        }
+
+        private void classBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                e.Handled = true;
+                if (dataManager.LockerSheets.Any(x => x.Name == classBox.Text)){return;}
+                classBox.Items[dataManager.currentSheet] = classBox.Text;
+                dataManager.LockerSheets[dataManager.currentSheet].Name = classBox.Text;
+            }
         }
 
 

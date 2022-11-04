@@ -50,20 +50,19 @@ namespace LockerRoom_Manager
       
         //locker system
 
-        public static List<Locker> LockersList = new List<Locker>();
         public static List<LockerSheet> LockerSheets = new List<LockerSheet>();
         public static int currentSheet = 0;
         public static void RefreshLockersData()
         {
             FirebaseResponse res = client.Get("Lockers");
             Dictionary<string, Locker> data = JsonConvert.DeserializeObject<Dictionary<string, Locker>>(res.Body.ToString());
-            LockersList.Clear();
+            LockerSheets[dataManager.currentSheet].lockers.Clear();
             if (data != null)
             {
                 foreach (string key in data.Keys)
                 {
                     data[key].ID -= 1000;
-                    LockersList.Add(data[key]);
+                    LockerSheets[dataManager.currentSheet].lockers.Add(data[key]);
                 }
             }
         }
@@ -79,10 +78,10 @@ namespace LockerRoom_Manager
         }
         public static Locker CreateLocker(int[] coords)
         {
-            Locker newLocker = new Locker(LockersList.Count != 0 ? LockersList[LockersList.Count - 1].ID + 1000 + maxNum() : 1001, coords);
+            Locker newLocker = new Locker(LockerSheets[dataManager.currentSheet].lockers.Count != 0 ? LockerSheets[dataManager.currentSheet].lockers[LockerSheets[dataManager.currentSheet].lockers.Count - 1].ID + 1000 + maxNum() : 1001, coords);
             client.Set("Lockers/" + newLocker.ID, newLocker);
             newLocker.ID -= 1000;
-            LockersList.Add(newLocker);
+            LockerSheets[dataManager.currentSheet].lockers.Add(newLocker);
             return newLocker;
 
         }
@@ -91,18 +90,18 @@ namespace LockerRoom_Manager
             newLocker.ID += 1000;
             client.Set("Lockers/" + newLocker.ID, newLocker);
             newLocker.ID -= 1000;
-            LockersList.Add(newLocker);
+            LockerSheets[dataManager.currentSheet].lockers.Add(newLocker);
         }
         public static void UpdateLocker(Locker newLocker)
         {
             newLocker.ID += 1000;
             client.Update("Lockers/" + newLocker.ID, newLocker);
             newLocker.ID -= 1000;
-            LockersList[LockersList.IndexOf(FindLocker(newLocker.ID))].Coords = newLocker.Coords;
+            LockerSheets[dataManager.currentSheet].lockers[LockerSheets[dataManager.currentSheet].lockers.IndexOf(FindLocker(newLocker.ID))].Coords = newLocker.Coords;
         }
         public static Locker FindLocker(int id)
         {
-            foreach (Locker locker in LockersList)
+            foreach (Locker locker in LockerSheets[dataManager.currentSheet].lockers)
             {
                 if (locker.ID == id)
                 {
@@ -113,10 +112,10 @@ namespace LockerRoom_Manager
         }
         private static int maxNum()
         {
-            for (int i = 0; i < LockersList.Count; i++)
+            for (int i = 0; i < LockerSheets[dataManager.currentSheet].lockers.Count; i++)
             {
                 int tempNum = 0;
-                if (LockersList[i].ID > tempNum) { tempNum = LockersList[i].ID;}
+                if (LockerSheets[dataManager.currentSheet].lockers[i].ID > tempNum) { tempNum = LockerSheets[dataManager.currentSheet].lockers[i].ID;}
             }
             return 1;
         }
