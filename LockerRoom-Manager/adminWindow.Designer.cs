@@ -154,9 +154,9 @@ namespace LockerRoom_Manager
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(41, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 35);
+            this.label1.Size = new System.Drawing.Size(141, 35);
             this.label1.TabIndex = 11;
-            this.label1.Text = "ADMINISTRATOR";
+            this.label1.Text = "NEW PROJECT";
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 

@@ -160,8 +160,9 @@ namespace LockerRoom_Manager
         {
             try
             {
-                openFileDialog1.ShowDialog();
-                string backup = File.OpenText(openFileDialog1.FileName).ReadToEnd();
+                if(openFileDialog1.ShowDialog() != DialogResult.OK) { return; }
+                label1.Text = openFileDialog1.SafeFileName;
+                string backup = File.ReadAllText(openFileDialog1.FileName);
                 dataManager.LockerSheets.Clear();
                 classBox.Items.Clear();
                 var package = new ExcelPackage(openFileDialog1.FileName);
@@ -203,7 +204,11 @@ namespace LockerRoom_Manager
         {
             try
             {
-                saveFileDialog1.ShowDialog();
+                if(saveFileDialog1.ShowDialog() != DialogResult.OK) { return; }
+                foreach (var ls in dataManager.LockerSheets)
+                {
+                    ls.lockers = ls.lockers.OrderBy(z => z.ID).ToList();
+                }
                 var package = new ExcelPackage();
 
 
@@ -232,20 +237,21 @@ namespace LockerRoom_Manager
                     ws.Columns[2].Width = 25;
                     ws.Columns[4].Width = 11;
 
-                    for (int i = 0; i < dataManager.LockerSheets[dataManager.currentSheet].lockers.Count; i++)
+                    for (int i = 0; i < dataManager.LockerSheets[x].lockers.Count; i++)
                     {
-                        Locker tempL = dataManager.LockerSheets[dataManager.currentSheet].lockers[i];
+                        Locker tempL = dataManager.LockerSheets[x].lockers[i];
                         ws.Cells[i + 4, 1].Value = tempL.ID.ToString();
                         ws.Cells[i + 4, 2].Value = tempL.NameOfHolder;
                         ws.Cells[i + 4, 3].Value = tempL.HolderClass;
                         ws.Cells[i + 4, 4].Value = tempL.Coords[0].ToString() + "," + tempL.Coords[1].ToString();
                     }
+
                 }
                 package.SaveAs(saveFileDialog1.FileName);
                 
 
             }
-            catch (Exception ex){ MessageBox.Show(ex.Message); }  // To do: saving to same file error
+            catch (Exception ex){ MessageBox.Show(ex.Message); }
         }
 
 
@@ -256,7 +262,6 @@ namespace LockerRoom_Manager
         }
         private void newRoom_Click(object sender, EventArgs e)
         {
-            if (dataManager.LockerSheets.Count < 1) { return; }
             string name = "New locker room";
             while(dataManager.LockerSheets.Any(x => x.Name == name))
             {
@@ -270,8 +275,8 @@ namespace LockerRoom_Manager
         }
         private void deleteRoom_Click(object sender, EventArgs e)
         {
-            if (dataManager.LockerSheets.Count < 1) { return; }
-            if (MessageBox.Show( "Do you really want to delete current locker room?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dataManager.LockerSheets.Count <= 1) { return; }
+            if (MessageBox.Show( $"Do you really want to delete current locker room named {dataManager.LockerSheets[dataManager.currentSheet].Name} ?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 dataManager.LockerSheets.RemoveAt(dataManager.currentSheet);
                 classBox.Items.RemoveAt(dataManager.currentSheet);
@@ -298,7 +303,8 @@ namespace LockerRoom_Manager
             if (e.KeyChar == '\r')
             {
                 e.Handled = true;
-                if (dataManager.LockerSheets.Any(x => x.Name == classBox.Text)){return;}
+                if (classBox.Text == "" || dataManager.LockerSheets.Any(x => x.Name == classBox.Text)){ classBox.Text = classBox.Items[dataManager.currentSheet].ToString() ; return; }
+                classBox.Text = classBox.Text.Trim();
                 classBox.Items[dataManager.currentSheet] = classBox.Text;
                 dataManager.LockerSheets[dataManager.currentSheet].Name = classBox.Text;
             }
