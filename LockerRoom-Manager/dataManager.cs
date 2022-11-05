@@ -24,10 +24,9 @@ namespace LockerRoom_Manager
         }
         public static Locker CreateLocker(int[] coords)
         {
-            Locker newLocker = new Locker(LockerSheets[dataManager.currentSheet].lockers.Count != 0 ? LockerSheets[dataManager.currentSheet].lockers[LockerSheets[dataManager.currentSheet].lockers.Count - 1].ID + maxNum() : 1, coords);
+            Locker newLocker = new Locker(LockerSheets[dataManager.currentSheet].lockers.Count != 0 ? LockerSheets[currentSheet].lockers.Max(x => x.ID) + 1 : 1, coords);
             LockerSheets[dataManager.currentSheet].lockers.Add(newLocker);
             return newLocker;
-
         }
         public static void CreateLocker(Locker newLocker)
         {
@@ -48,14 +47,6 @@ namespace LockerRoom_Manager
             }
             return null;
         }
-        private static int maxNum()
-        {
-            for (int i = 0; i < LockerSheets[dataManager.currentSheet].lockers.Count; i++)
-            {
-                int tempNum = 0;
-                if (LockerSheets[dataManager.currentSheet].lockers[i].ID > tempNum) { tempNum = LockerSheets[dataManager.currentSheet].lockers[i].ID;}
-            }
-            return 1;
-        }
+
     }
 }

@@ -185,10 +185,6 @@ namespace LockerRoom_Manager
                 {
                     dataManager.currentSheet = 0;
                     classBox.SelectedItem = dataManager.LockerSheets[0].Name;
-                    foreach (Locker tempLocker in dataManager.LockerSheets[dataManager.currentSheet].lockers)
-                    {
-                        this.printNewLocker(tempLocker.ID, tempLocker.Coords, tempLocker.NameOfHolder == "" && tempLocker.HolderClass == "");
-                    }
                     nameBox_TextChanged(null, null);
                 }
                 else

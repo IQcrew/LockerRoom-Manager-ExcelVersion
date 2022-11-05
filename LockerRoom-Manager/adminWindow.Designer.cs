@@ -70,7 +70,7 @@ namespace LockerRoom_Manager
             LockersNumbers.Remove(lckr);
 
         }
-        public void LockerState(int id,bool open) {
+        public void LockerState(int id,bool open) { 
             System.Windows.Forms.PictureBox lckr = getLockerPictureBox(id);
             if (lckr == null) { return; }
             lckr.Image = open ? global::LockerRoom_Manager.Properties.Resources.openLocker : global::LockerRoom_Manager.Properties.Resources.closeLocker;
