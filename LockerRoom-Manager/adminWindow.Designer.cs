@@ -65,8 +65,9 @@ namespace LockerRoom_Manager
             System.Windows.Forms.Label lbl = LockersNumbers[lckr];
             lckr.Hide();
             lbl.Hide();
-            Controls.Remove(lbl);
-            Controls.Remove(lckr);
+            panel1.Controls.Remove(lbl);
+            panel1.Controls.Remove(lckr);
+            panel1.Refresh();
             LockersNumbers.Remove(lckr);
 
         }
