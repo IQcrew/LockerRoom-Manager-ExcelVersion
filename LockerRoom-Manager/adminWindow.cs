@@ -283,6 +283,8 @@ namespace LockerRoom_Manager
                 dataManager.LockerSheets.RemoveAt(dataManager.currentSheet);
                 classBox.Items.RemoveAt(dataManager.currentSheet);
                 dataManager.currentSheet = dataManager.LockerSheets.Count>1 ? dataManager.currentSheet-1 : 0;
+                changeLockerRoom(dataManager.currentSheet);
+                classBox.SelectedIndex = dataManager.currentSheet;
 
             }
         }
