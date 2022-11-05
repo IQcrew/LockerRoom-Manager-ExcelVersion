@@ -32,9 +32,6 @@ namespace LockerRoom_Manager
         public adminWindow()
         {
             InitializeComponent();
-            //dataManager.SetUp();
-            dataManager.newRefreshLockersData();
-            //foreach  (Locker lckr in dataManager.LockerSheets[dataManager.currentSheet].lockers){this.printNewLocker(lckr.ID,lckr.Coords, lckr.NameOfHolder =="" && lckr.HolderClass == ""); }
             nameBox_TextChanged(null, null);
             saveFileDialog1.Filter = "Data Files (*.xlsx)|*.xlsx";
             saveFileDialog1.AddExtension = true;
