@@ -26,12 +26,13 @@ namespace LockerRoom_Manager
         {
             System.Windows.Forms.PictureBox tempPictureBox = new System.Windows.Forms.PictureBox();
 
-            tempPictureBox.Image =  empty ? global::LockerRoom_Manager.Properties.Resources.openLocker : global::LockerRoom_Manager.Properties.Resources.closeLocker;
+            tempPictureBox.Image = empty ? global::LockerRoom_Manager.Properties.Resources.openLocker : global::LockerRoom_Manager.Properties.Resources.closeLocker;
             tempPictureBox.Location = new System.Drawing.Point(coords[0], coords[1]);
             tempPictureBox.Size = new System.Drawing.Size(38, 89);
             tempPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             tempPictureBox.TabIndex = 0;
             tempPictureBox.TabStop = false;
+            tempPictureBox.Click += new System.EventHandler(this.lockerSelection_Click);
             tempPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.locker_MouseDown);
             tempPictureBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.openLockerProperties);
             tempPictureBox.LocationChanged += new System.EventHandler(this.locker_LocationChanged);
@@ -47,6 +48,7 @@ namespace LockerRoom_Manager
             tempLabel.Location = new System.Drawing.Point(coords[0] + 8,coords[1] + 60);
             tempLabel.Size = new System.Drawing.Size(26, 19);
             tempLabel.TabIndex = 1;
+            tempLabel.Click += new System.EventHandler(this.lockerSelection_Click);
             tempLabel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.openLockerProperties);
             tempLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.locker_MouseDown);
             tempLabel.Cursor = System.Windows.Forms.Cursors.SizeAll;
@@ -121,6 +123,10 @@ namespace LockerRoom_Manager
             this.classBox = new System.Windows.Forms.ComboBox();
             this.deleteRoom = new System.Windows.Forms.Button();
             this.newRoom = new System.Windows.Forms.Button();
+            this.multipleSelection = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.clearLockersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deteleLockersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deselectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -128,6 +134,7 @@ namespace LockerRoom_Manager
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.multipleSelection.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -145,6 +152,7 @@ namespace LockerRoom_Manager
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1229, 761);
             this.panel1.TabIndex = 12;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
             // label1
             // 
@@ -227,7 +235,7 @@ namespace LockerRoom_Manager
             this.listBox1.ItemHeight = 19;
             this.listBox1.Location = new System.Drawing.Point(6, 263);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(207, 384);
+            this.listBox1.Size = new System.Drawing.Size(207, 365);
             this.listBox1.TabIndex = 42;
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
@@ -387,6 +395,34 @@ namespace LockerRoom_Manager
             this.newRoom.UseVisualStyleBackColor = false;
             this.newRoom.Click += new System.EventHandler(this.newRoom_Click);
             // 
+            // multipleSelection
+            // 
+            this.multipleSelection.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearLockersToolStripMenuItem,
+            this.deteleLockersToolStripMenuItem,
+            this.deselectToolStripMenuItem});
+            this.multipleSelection.Name = "multipleSelection";
+            this.multipleSelection.Size = new System.Drawing.Size(148, 70);
+            this.multipleSelection.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.multipleSelection_ItemClicked);
+            // 
+            // clearLockersToolStripMenuItem
+            // 
+            this.clearLockersToolStripMenuItem.Name = "clearLockersToolStripMenuItem";
+            this.clearLockersToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.clearLockersToolStripMenuItem.Text = "Clear lockers";
+            // 
+            // deteleLockersToolStripMenuItem
+            // 
+            this.deteleLockersToolStripMenuItem.Name = "deteleLockersToolStripMenuItem";
+            this.deteleLockersToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.deteleLockersToolStripMenuItem.Text = "Delete lockers";
+            // 
+            // deselectToolStripMenuItem
+            // 
+            this.deselectToolStripMenuItem.Name = "deselectToolStripMenuItem";
+            this.deselectToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.deselectToolStripMenuItem.Text = "Deselect";
+            // 
             // adminWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -424,6 +460,7 @@ namespace LockerRoom_Manager
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.multipleSelection.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,5 +493,9 @@ namespace LockerRoom_Manager
         private System.Windows.Forms.ComboBox classBox;
         private System.Windows.Forms.Button deleteRoom;
         private System.Windows.Forms.Button newRoom;
+        private System.Windows.Forms.ContextMenuStrip multipleSelection;
+        private System.Windows.Forms.ToolStripMenuItem clearLockersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deteleLockersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deselectToolStripMenuItem;
     }
 }

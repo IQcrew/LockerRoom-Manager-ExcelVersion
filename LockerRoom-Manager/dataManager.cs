@@ -16,29 +16,31 @@ namespace LockerRoom_Manager
         //locker system
 
         public static List<LockerSheet> LockerSheets = new List<LockerSheet>();
-        public static int currentSheet = 0;
+        public static int currentSheetIndex = 0;
+
+        public static LockerSheet currentSheet { get => LockerSheets[currentSheetIndex]; set => LockerSheets[currentSheetIndex] = value; }
 
         public static void DeleteLocker(int id)
         {
-            try { LockerSheets[currentSheet].lockers.Remove(LockerSheets[currentSheet].lockers.Find(x => x.ID == id)); } catch { }
+            try { LockerSheets[currentSheetIndex].lockers.Remove(LockerSheets[currentSheetIndex].lockers.Find(x => x.ID == id)); } catch { }
         }
         public static Locker CreateLocker(int[] coords)
         {
-            Locker newLocker = new Locker(LockerSheets[dataManager.currentSheet].lockers.Count != 0 ? LockerSheets[currentSheet].lockers.Max(x => x.ID) + 1 : 1, coords);
-            LockerSheets[dataManager.currentSheet].lockers.Add(newLocker);
+            Locker newLocker = new Locker(LockerSheets[dataManager.currentSheetIndex].lockers.Count != 0 ? LockerSheets[currentSheetIndex].lockers.Max(x => x.ID) + 1 : 1, coords);
+            LockerSheets[dataManager.currentSheetIndex].lockers.Add(newLocker);
             return newLocker;
         }
         public static void CreateLocker(Locker newLocker)
         {
-            LockerSheets[dataManager.currentSheet].lockers.Add(newLocker);
+            LockerSheets[dataManager.currentSheetIndex].lockers.Add(newLocker);
         }
         public static void UpdateLocker(Locker newLocker)
         {
-            LockerSheets[dataManager.currentSheet].lockers[LockerSheets[dataManager.currentSheet].lockers.IndexOf(FindLocker(newLocker.ID))].Coords = newLocker.Coords;
+            LockerSheets[dataManager.currentSheetIndex].lockers[LockerSheets[dataManager.currentSheetIndex].lockers.IndexOf(FindLocker(newLocker.ID))].Coords = newLocker.Coords;
         }
         public static Locker FindLocker(int id)
         {
-            foreach (Locker locker in LockerSheets[dataManager.currentSheet].lockers)
+            foreach (Locker locker in LockerSheets[dataManager.currentSheetIndex].lockers)
             {
                 if (locker.ID == id)
                 {

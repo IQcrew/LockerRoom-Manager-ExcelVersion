@@ -15,6 +15,7 @@ using OfficeOpenXml.Style;
 using System.Net.Http.Headers;
 using Microsoft.Office.Interop.Excel;
 
+
 namespace LockerRoom_Manager
 {
     public partial class adminWindow : Form
@@ -25,7 +26,7 @@ namespace LockerRoom_Manager
         System.Drawing.Point LastObjectCoords = new System.Drawing.Point();
         PictureBox selectedLocker = new PictureBox();
         System.Windows.Forms.Label selectedLabel = new System.Windows.Forms.Label();
-
+        List<int> selectedLockers = new List<int>();
         public List<int> openLockerTabs = new List<int>();
 
 
@@ -100,7 +101,7 @@ namespace LockerRoom_Manager
 
         private bool possiblePos(int x, int y)
         {
-            foreach (Locker lckr in dataManager.LockerSheets[dataManager.currentSheet].lockers)
+            foreach (Locker lckr in dataManager.currentSheet.lockers)
             {
                 if ( selectedLabel.Text != lckr.ID.ToString() && Math.Abs(lckr.Coords[0] - x) <=39 && Math.Abs(lckr.Coords[1] - y) <= 89) { return false; }
             }
@@ -151,7 +152,7 @@ namespace LockerRoom_Manager
         {
             if (dataManager.LockerSheets.Count < 1) { return; }
             listBox1.Items.Clear();
-            foreach (Locker item in dataManager.LockerSheets[dataManager.currentSheet].lockers)
+            foreach (Locker item in dataManager.currentSheet.lockers)
             {
                 if (item.NameOfHolder.ToLower().Contains(nameBox.Text.ToLower())){listBox1.Items.Add(item.ID.ToString() +" - "+item.NameOfHolder);}
             }
@@ -184,7 +185,7 @@ namespace LockerRoom_Manager
                 }
                 if (dataManager.LockerSheets.Count > 0)
                 {
-                    dataManager.currentSheet = 0;
+                    dataManager.currentSheetIndex = 0;
                     classBox.SelectedItem = dataManager.LockerSheets[0].Name;
                     nameBox_TextChanged(null, null);
                 }
@@ -276,22 +277,22 @@ namespace LockerRoom_Manager
         private void deleteRoom_Click(object sender, EventArgs e)
         {
             if (dataManager.LockerSheets.Count <= 1) { return; }
-            if (MessageBox.Show( $"Do you really want to delete current locker room named {dataManager.LockerSheets[dataManager.currentSheet].Name} ?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show( $"Do you really want to delete current locker room named {dataManager.currentSheet.Name} ?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                dataManager.LockerSheets.RemoveAt(dataManager.currentSheet);
-                classBox.Items.RemoveAt(dataManager.currentSheet);
-                dataManager.currentSheet = dataManager.LockerSheets.Count>1 ? dataManager.currentSheet-1 : 0;
-                changeLockerRoom(dataManager.currentSheet);
-                classBox.SelectedIndex = dataManager.currentSheet;
+                dataManager.LockerSheets.RemoveAt(dataManager.currentSheetIndex);
+                classBox.Items.RemoveAt(dataManager.currentSheetIndex);
+                dataManager.currentSheetIndex = dataManager.LockerSheets.Count>1 ? dataManager.currentSheetIndex-1 : 0;
+                changeLockerRoom(dataManager.currentSheetIndex);
+                classBox.SelectedIndex = dataManager.currentSheetIndex;
 
             }
         }
         private void changeLockerRoom(int index)
         {
             if (dataManager.LockerSheets.Count < 1) { return; }
-            dataManager.currentSheet = index;
+            dataManager.currentSheetIndex = index;
             panel1.Controls.Clear();
-            foreach (Locker lck in dataManager.LockerSheets[dataManager.currentSheet].lockers)
+            foreach (Locker lck in dataManager.currentSheet.lockers)
             {
                 this.printNewLocker(lck.ID, lck.Coords, lck.NameOfHolder == "" && lck.HolderClass == "");
             }
@@ -303,12 +304,60 @@ namespace LockerRoom_Manager
             if (e.KeyChar == '\r')
             {
                 e.Handled = true;
-                if (classBox.Text == "" || dataManager.LockerSheets.Any(x => x.Name == classBox.Text)){ classBox.Text = classBox.Items[dataManager.currentSheet].ToString() ; return; }
+                if (classBox.Text == "" || dataManager.LockerSheets.Any(x => x.Name == classBox.Text)){ classBox.Text = classBox.Items[dataManager.currentSheetIndex].ToString() ; return; }
                 classBox.Text = classBox.Text.Trim();
-                classBox.Items[dataManager.currentSheet] = classBox.Text;
-                dataManager.LockerSheets[dataManager.currentSheet].Name = classBox.Text;
+                classBox.Items[dataManager.currentSheetIndex] = classBox.Text;
+                dataManager.currentSheet.Name = classBox.Text;
             }
         }
+
+        private void panel1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right) { multipleSelection.Show(System.Windows.Forms.Cursor.Position); }
+        }
+
+        private void lockerSelection_Click(object sender, EventArgs e)
+        {
+            if (Control.ModifierKeys == Keys.Shift)
+            {
+                int lockerID = sender.GetType().ToString() == "System.Windows.Forms.PictureBox" ? Int32.Parse((sender as PictureBox).Name) : Int32.Parse((sender as System.Windows.Forms.Label).Text);
+                System.Windows.Forms.PictureBox tempPictureBox = this.getLockerPictureBox(lockerID);
+                if (selectedLockers.Contains(lockerID))
+                {
+                    selectedLockers.Remove(lockerID);
+                    
+                }
+                else
+                {
+                    selectedLockers.Add(lockerID);
+                    
+                }
+            }
+        }
+
+        private void multipleSelection_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            switch (e.ClickedItem.Text)
+            {
+                case "Clear lockers":
+
+
+
+                    break;
+
+                case "Delete lockers":
+                    break;
+
+                case "Deselect":
+
+                    break;
+
+
+                default:
+                    return;
+            }
+        }
+
 
 
         // WINDOW DESINGN
