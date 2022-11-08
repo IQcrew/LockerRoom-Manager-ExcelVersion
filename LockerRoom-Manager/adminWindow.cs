@@ -49,8 +49,8 @@ namespace LockerRoom_Manager
         }
         private void locker_MouseDown(object sender,System.Windows.Forms.MouseEventArgs e)
         {
-
-            if(sender.GetType().ToString() == "System.Windows.Forms.PictureBox")
+            if (e.Button == MouseButtons.Right) { multipleSelection.Show(System.Windows.Forms.Cursor.Position); }
+            if (sender.GetType().ToString() == "System.Windows.Forms.PictureBox")
             {
                 selectedLocker = sender as PictureBox;
                 selectedLabel = LockersNumbers[selectedLocker];
@@ -69,7 +69,7 @@ namespace LockerRoom_Manager
         }
         private void locker_MouseUp()
         {
-            selectedLocker.BorderStyle = BorderStyle.None;
+            if (!selectedLockers.Contains(Int32.Parse(selectedLocker.Name))) { selectedLocker.BorderStyle = BorderStyle.None; }
             MouseHoldLocker = false;
             if(selectedLocker.Location == LastObjectCoords) { return; }
             if (possiblePos(selectedLocker.Location.X, selectedLocker.Location.Y))
@@ -83,7 +83,7 @@ namespace LockerRoom_Manager
                 selectedLocker.Location = LastObjectCoords;
                 selectedLabel.Location = new System.Drawing.Point(selectedLocker.Location.X + 8, selectedLocker.Location.Y + 60);
             }
-            selectedLocker.BorderStyle = BorderStyle.None;
+
         }
         private void locker_LocationChanged(object sender, EventArgs e)
         {
@@ -269,7 +269,6 @@ namespace LockerRoom_Manager
                 name += "_";
             }
             dataManager.LockerSheets.Add(new LockerSheet(name));
-            changeLockerRoom(dataManager.LockerSheets.Count-1);
             classBox.Items.Add(name);
             classBox.SelectedItem = name;
 
@@ -290,6 +289,7 @@ namespace LockerRoom_Manager
         private void changeLockerRoom(int index)
         {
             if (dataManager.LockerSheets.Count < 1) { return; }
+            selectedLockers.Clear();
             dataManager.currentSheetIndex = index;
             panel1.Controls.Clear();
             foreach (Locker lck in dataManager.currentSheet.lockers)
@@ -325,12 +325,12 @@ namespace LockerRoom_Manager
                 if (selectedLockers.Contains(lockerID))
                 {
                     selectedLockers.Remove(lockerID);
-                    
+                    tempPictureBox.BorderStyle = BorderStyle.None;
                 }
                 else
                 {
                     selectedLockers.Add(lockerID);
-                    
+                    tempPictureBox.BorderStyle = BorderStyle.Fixed3D;
                 }
             }
         }
@@ -349,7 +349,7 @@ namespace LockerRoom_Manager
                     break;
 
                 case "Deselect":
-
+                    clearSelected();
                     break;
 
 
@@ -357,7 +357,11 @@ namespace LockerRoom_Manager
                     return;
             }
         }
-
+        public void clearSelected()
+        {
+            foreach (int lckrID in selectedLockers) { this.getLockerPictureBox(lckrID).BorderStyle = BorderStyle.None; }
+            selectedLockers.Clear();
+        }
 
 
         // WINDOW DESINGN

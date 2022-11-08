@@ -45,6 +45,7 @@ namespace LockerRoom_Manager
             {
                 if (dataManager.FindLocker(Int32.Parse(idBox.Text)) == null)
                 {
+                    main.clearSelected();
                     main.openLockerTabs.Remove(originalID);
                     main.nameBox_TextChanged(null, null);
                     dataManager.DeleteLocker(lckr.ID);
