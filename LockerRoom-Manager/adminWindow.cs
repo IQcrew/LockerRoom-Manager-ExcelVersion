@@ -311,12 +311,25 @@ namespace LockerRoom_Manager
             switch (e.ClickedItem.Text)
             {
                 case "Clear lockers":
-
-
+                    foreach (int lckrID in selectedLockers)
+                    {
+                        Locker tempLckr = dataManager.FindLocker(lckrID);
+                        tempLckr.HolderClass = "";
+                        tempLckr.NameOfHolder = "";
+                        this.LockerState(lckrID, tempLckr.HolderClass == "" && tempLckr.NameOfHolder == "");
+                    }
+                    clearSelected();
 
                     break;
 
                 case "Delete lockers":
+
+                    foreach (var item in dataManager.currentSheet.lockers.Where(x => selectedLockers.Contains(x.ID)).ToList())
+                    {
+                        dataManager.currentSheet.lockers.Remove(item);
+                    }
+                    changeLockerRoom(dataManager.currentSheetIndex);
+
                     break;
 
                 case "Deselect":
