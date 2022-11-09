@@ -132,6 +132,8 @@ namespace LockerRoom_Manager
             this.clearLockersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deteleLockersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deselectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.clearLockerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -140,6 +142,7 @@ namespace LockerRoom_Manager
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.multipleSelection.SuspendLayout();
+            this.searchMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -240,9 +243,11 @@ namespace LockerRoom_Manager
             this.listBox1.ItemHeight = 19;
             this.listBox1.Location = new System.Drawing.Point(6, 263);
             this.listBox1.Name = "listBox1";
+            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBox1.Size = new System.Drawing.Size(207, 365);
             this.listBox1.TabIndex = 42;
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
+            this.listBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
             // 
             // ImportBackup
             // 
@@ -428,6 +433,20 @@ namespace LockerRoom_Manager
             this.deselectToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.deselectToolStripMenuItem.Text = "Deselect";
             // 
+            // searchMenu
+            // 
+            this.searchMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearLockerToolStripMenuItem});
+            this.searchMenu.Name = "searchMenu";
+            this.searchMenu.Size = new System.Drawing.Size(181, 48);
+            // 
+            // clearLockerToolStripMenuItem
+            // 
+            this.clearLockerToolStripMenuItem.Name = "clearLockerToolStripMenuItem";
+            this.clearLockerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearLockerToolStripMenuItem.Text = "Clear locker";
+            this.clearLockerToolStripMenuItem.Click += new System.EventHandler(this.clearLockerToolStripMenuItem_Click);
+            // 
             // adminWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -466,6 +485,7 @@ namespace LockerRoom_Manager
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.multipleSelection.ResumeLayout(false);
+            this.searchMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -501,5 +521,7 @@ namespace LockerRoom_Manager
         private System.Windows.Forms.ToolStripMenuItem clearLockersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deteleLockersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deselectToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip searchMenu;
+        private System.Windows.Forms.ToolStripMenuItem clearLockerToolStripMenuItem;
     }
 }

@@ -66,7 +66,6 @@ namespace LockerRoom_Manager
             CursorMouseCoords = System.Windows.Forms.Cursor.Position;
             LastObjectCoords = selectedLocker.Location;
             MouseHoldLocker = true;
-
         }
         private void locker_MouseUp()
         {
@@ -136,7 +135,9 @@ namespace LockerRoom_Manager
             listBox1.Items.Clear();
             foreach (Locker item in dataManager.currentSheet.lockers)
             {
-                if (item.NameOfHolder.ToLower().Contains(nameBox.Text.ToLower())){listBox1.Items.Add(item.ID.ToString() +" - "+item.NameOfHolder);}
+                if ($"{item.HolderClass.ToLower()} {item.NameOfHolder.ToLower()}".Contains(nameBox.Text.ToLower())){
+                    listBox1.Items.Add(item.ID.ToString() +" - "+ item.HolderClass+" - "+item.NameOfHolder);
+                }
             }
         }
         private void ImportBackup_Click(object sender, EventArgs e)
@@ -341,6 +342,24 @@ namespace LockerRoom_Manager
                     return;
             }
         }
+        private void listBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right) { searchMenu.Show(System.Windows.Forms.Cursor.Position); }
+        }
+        private void clearLockerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var item in listBox1.SelectedItems)
+            {
+                int lckrID = Int32.Parse(item.ToString().Split(' ')[0]);
+                Locker tempLckr = dataManager.FindLocker(lckrID);
+                tempLckr.HolderClass = "";
+                tempLckr.NameOfHolder = "";
+                this.LockerState(lckrID, tempLckr.HolderClass == "" && tempLckr.NameOfHolder == "");
+            }
+            nameBox_TextChanged(null, null);
+        }
+
+
         #endregion
 
         #region additional methods
@@ -450,5 +469,7 @@ namespace LockerRoom_Manager
             e.Handled = e.KeyChar == '\r';
         }
         #endregion
+
+
     }
 }
