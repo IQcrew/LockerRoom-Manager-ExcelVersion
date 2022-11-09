@@ -42,7 +42,7 @@ namespace LockerRoom_Manager
             OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
         }
 
-
+        #region events
         private void button1_Click(object sender, EventArgs e)
         {
             createNewLocker();
@@ -100,25 +100,6 @@ namespace LockerRoom_Manager
             return new System.Drawing.Point(x,y);
         }
 
-        private bool possiblePos(int x, int y)
-        {
-            foreach (Locker lckr in dataManager.currentSheet.lockers)
-            {
-                if ( selectedLabel.Text != lckr.ID.ToString() && Math.Abs(lckr.Coords[0] - x) <=39 && Math.Abs(lckr.Coords[1] - y) <= 89) { return false; }
-            }
-
-            return true;
-        }
-
-        private void createNewLocker()
-        {
-            if (dataManager.LockerSheets.Count < 1) { return; }
-            if (possiblePos(0, 0))
-            {
-                Locker newLocker = dataManager.CreateLocker(new int[] {0,0});
-                this.printNewLocker(newLocker.ID,newLocker.Coords, true);
-            }
-        }
 
 
         private void openLockerProperties(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -287,19 +268,7 @@ namespace LockerRoom_Manager
 
             }
         }
-        private void changeLockerRoom(int index)
-        {
-            if (dataManager.LockerSheets.Count < 1) { return; }
-            selectedLockers.Clear();
-            dataManager.currentSheetIndex = index;
-            panel1.Controls.Clear();
-            this.LockersNumbers.Clear();
-            foreach (Locker lck in dataManager.currentSheet.lockers)
-            {
-                this.printNewLocker(lck.ID, lck.Coords, lck.NameOfHolder == "" && lck.HolderClass == "");
-            }
-            
-        }
+
 
         private void classBox_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -359,14 +328,53 @@ namespace LockerRoom_Manager
                     return;
             }
         }
+        #endregion
+
+        #region additional methods
+
+        private void changeLockerRoom(int index)
+        {
+            if (dataManager.LockerSheets.Count < 1) { return; }
+            selectedLockers.Clear();
+            dataManager.currentSheetIndex = index;
+            panel1.Controls.Clear();
+            this.LockersNumbers.Clear();
+            foreach (Locker lck in dataManager.currentSheet.lockers)
+            {
+                this.printNewLocker(lck.ID, lck.Coords, lck.NameOfHolder == "" && lck.HolderClass == "");
+            }
+
+        }
+
         public void clearSelected()
         {
             foreach (int lckrID in selectedLockers) { this.getLockerPictureBox(lckrID).BorderStyle = BorderStyle.None; }
             selectedLockers.Clear();
         }
+        private bool possiblePos(int x, int y)
+        {
+            foreach (Locker lckr in dataManager.currentSheet.lockers)
+            {
+                if ( selectedLabel.Text != lckr.ID.ToString() && Math.Abs(lckr.Coords[0] - x) <=39 && Math.Abs(lckr.Coords[1] - y) <= 89) { return false; }
+            }
+
+            return true;
+        }
+
+        private void createNewLocker()
+        {
+            if (dataManager.LockerSheets.Count < 1) { return; }
+            if (possiblePos(0, 0))
+            {
+                Locker newLocker = dataManager.CreateLocker(new int[] {0,0});
+                this.printNewLocker(newLocker.ID,newLocker.Coords, true);
+            }
+        }
+
+        #endregion
 
 
-        // WINDOW DESINGN
+        #region WINDOW DESINGN
         bool MouseHold = false;
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -428,6 +436,6 @@ namespace LockerRoom_Manager
         {
             e.Handled = e.KeyChar == '\r';
         }
-
+        #endregion
     }
 }

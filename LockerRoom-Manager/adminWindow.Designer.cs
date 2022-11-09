@@ -22,6 +22,9 @@ namespace LockerRoom_Manager
             base.Dispose(disposing);
         }
 
+        #region graphics of lockers
+        
+        public Dictionary<System.Windows.Forms.PictureBox, System.Windows.Forms.Label> LockersNumbers = new Dictionary<System.Windows.Forms.PictureBox, System.Windows.Forms.Label>();
         public void printNewLocker(int num, int[] coords, bool empty)
         {
             System.Windows.Forms.PictureBox tempPictureBox = new System.Windows.Forms.PictureBox();
@@ -90,6 +93,8 @@ namespace LockerRoom_Manager
             }
             return null;
         }
+        
+        #endregion
 
         #region Windows Form Designer generated code
 
@@ -468,7 +473,6 @@ namespace LockerRoom_Manager
 
         #endregion
 
-        public Dictionary<System.Windows.Forms.PictureBox, System.Windows.Forms.Label> LockersNumbers = new Dictionary<System.Windows.Forms.PictureBox, System.Windows.Forms.Label>();
 
 
         private System.Windows.Forms.PictureBox pictureBox5;
