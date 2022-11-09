@@ -46,6 +46,7 @@ namespace LockerRoom_Manager
         private void button1_Click(object sender, EventArgs e)
         {
             createNewLocker();
+            nameBox_TextChanged(null, null);
         }
         private void locker_MouseDown(object sender,System.Windows.Forms.MouseEventArgs e)
         {
@@ -292,6 +293,7 @@ namespace LockerRoom_Manager
             selectedLockers.Clear();
             dataManager.currentSheetIndex = index;
             panel1.Controls.Clear();
+            this.LockersNumbers.Clear();
             foreach (Locker lck in dataManager.currentSheet.lockers)
             {
                 this.printNewLocker(lck.ID, lck.Coords, lck.NameOfHolder == "" && lck.HolderClass == "");
