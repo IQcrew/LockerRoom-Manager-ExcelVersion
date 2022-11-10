@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace LockerRoom_Manager
 {
@@ -19,6 +20,16 @@ namespace LockerRoom_Manager
         {
             InitializeComponent();
             originalID = id;
+
+            try
+            {
+                string[] classList = File.ReadAllLines(".\\zoznamTried.txt");
+                foreach (var item in classList)
+                {
+                    if (item.Trim() != "") { classBox.Items.Add(item.Trim()); }
+                }
+            }
+            catch { }
         }
         private void LockerPropertiesAdminWindow_Load(object sender, EventArgs e)
         {

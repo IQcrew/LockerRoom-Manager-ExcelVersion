@@ -175,20 +175,6 @@
             this.classBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.classBox.ForeColor = System.Drawing.Color.White;
             this.classBox.FormattingEnabled = true;
-            this.classBox.Items.AddRange(new object[] {
-            "",
-            "I.AI",
-            "II.AI",
-            "III.AI",
-            "IV.AI",
-            "I.BI",
-            "II.BI",
-            "III.BI",
-            "IV.BI",
-            "I.CI",
-            "II.CI",
-            "III.CI",
-            "IV.CI"});
             this.classBox.Location = new System.Drawing.Point(12, 239);
             this.classBox.Name = "classBox";
             this.classBox.Size = new System.Drawing.Size(239, 41);

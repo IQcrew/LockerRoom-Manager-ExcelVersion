@@ -33,13 +33,15 @@ namespace LockerRoom_Manager
         public adminWindow()
         {
             InitializeComponent();
+            OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
             nameBox_TextChanged(null, null);
             saveFileDialog1.Filter = "Data Files (*.xlsx)|*.xlsx";
             saveFileDialog1.AddExtension = true;
             openFileDialog1.Filter = "Data Files (*.xlsx)|*.xlsx";
             openFileDialog1.AddExtension = true;
-            
-            OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
+
+
         }
 
         #region events

@@ -10,10 +10,10 @@ namespace LockerRoom_Manager
     internal static class dataManager
     {      
         //locker system
-
         public static List<LockerSheet> LockerSheets = new List<LockerSheet>();
         public static int currentSheetIndex = 0;
 
+    
         public static LockerSheet currentSheet { get => LockerSheets[currentSheetIndex]; set => LockerSheets[currentSheetIndex] = value; }
 
         public static void DeleteLocker(int id)
