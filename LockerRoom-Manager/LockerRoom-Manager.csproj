@@ -203,6 +203,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Properties\src\lockerTransparent.png" />
+    <None Include="Properties\src\lockerStroke.png" />
+    <None Include="Properties\src\BGpattern.png" />
     <Content Include="zoznamTried.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

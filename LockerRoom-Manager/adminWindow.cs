@@ -21,6 +21,7 @@ namespace LockerRoom_Manager
     public partial class adminWindow : Form
     {
         string openFile = "";
+        bool newLockerMode = false;
         bool MouseHoldLocker = false;
         System.Drawing.Point CursorMouseCoords = new System.Drawing.Point();
         System.Drawing.Point LastObjectCoords = new System.Drawing.Point();
@@ -40,15 +41,17 @@ namespace LockerRoom_Manager
             openFileDialog1.Filter = "Data Files (*.xlsx)|*.xlsx";
             openFileDialog1.AddExtension = true;
 
-
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.KeyPreview = true;
         }
 
         #region events
         private void button1_Click(object sender, EventArgs e)
         {
-            createNewLocker();
-            nameBox_TextChanged(null, null);
+            if (dataManager.LockerSheets.Count < 1) {return; }
+            newLockerMode = !newLockerMode;
+            newLockerButton.BackColor = newLockerMode ? Color.FromArgb(255, 0, 25, 35) : Color.FromArgb(255, 0, 85, 100);
+            NewLockerPictureB.Visible = newLockerMode;
         }
         private void locker_MouseDown(object sender,System.Windows.Forms.MouseEventArgs e)
         {
@@ -90,15 +93,6 @@ namespace LockerRoom_Manager
         private void locker_LocationChanged(object sender, EventArgs e)
         {
             selectedLocker.BorderStyle = BorderStyle.Fixed3D;
-        }
-        private System.Drawing.Point getCoordsOfLocker()  // coords limits 
-        {
-            int x = ((LastObjectCoords.X - (CursorMouseCoords.X - System.Windows.Forms.Cursor.Position.X))/10)*10;
-            int y = ((LastObjectCoords.Y - (CursorMouseCoords.Y - System.Windows.Forms.Cursor.Position.Y))/10)*10;
-            if (x < 0) { x = 0; }
-            if (y < 0) { y = 0; }
-
-            return new System.Drawing.Point(x,y);
         }
 
 
@@ -196,6 +190,13 @@ namespace LockerRoom_Manager
                 else if(dataManager.LockerSheets.Count > 0)
                     ExportFile_Click(null, null);
             }
+            if(e.KeyCode == Keys.Escape)
+            {
+                if (dataManager.LockerSheets.Count < 1) { return; }
+                newLockerMode = false;
+                newLockerButton.BackColor = newLockerMode ? Color.FromArgb(255, 0, 25, 35) : Color.FromArgb(255, 0, 85, 100);
+                NewLockerPictureB.Visible = newLockerMode;
+            }
         }
         private void ExportFile_Click(object sender, EventArgs e)
         {
@@ -208,6 +209,7 @@ namespace LockerRoom_Manager
         {
             changeLockerRoom(classBox.SelectedIndex);
             nameBox_TextChanged(null, null);
+            this.creteNewlockerPB();
         }
         private void newRoom_Click(object sender, EventArgs e)
         {
@@ -302,6 +304,17 @@ namespace LockerRoom_Manager
                 case "Deselect":
                     clearSelected();
                     break;
+                case "New locker":
+                    if(dataManager.LockerSheets.Count < 1) { break; }
+                    System.Drawing.Point tempP =panel1.PointToClient(System.Windows.Forms.Cursor.Position);
+                    int[] tempPos = { (int)((tempP.X/10)*10), (int)((tempP.Y / 10) * 10) };
+                    if (possiblePos(tempPos[0], tempPos[1]))
+                    {
+                        Locker newLocker = dataManager.CreateLocker(tempPos);
+                        this.printNewLocker(newLocker.ID, newLocker.Coords, true);
+                    }
+
+                    break;
 
 
                 default:
@@ -338,6 +351,16 @@ namespace LockerRoom_Manager
 
         #region additional methods
 
+        private System.Drawing.Point getCoordsOfLocker()  // coords limits 
+        {
+            int x = ((LastObjectCoords.X - (CursorMouseCoords.X - System.Windows.Forms.Cursor.Position.X))/10)*10;
+            int y = ((LastObjectCoords.Y - (CursorMouseCoords.Y - System.Windows.Forms.Cursor.Position.Y))/10)*10;
+            if (x < 0) { x = 0; }
+            if (y < 0) { y = 0; }
+
+            return new System.Drawing.Point(x,y);
+        }
+
         private void changeLockerRoom(int index)
         {
             if (dataManager.LockerSheets.Count < 1) { return; }
@@ -357,11 +380,11 @@ namespace LockerRoom_Manager
             foreach (int lckrID in selectedLockers) { this.getLockerPictureBox(lckrID).BorderStyle = BorderStyle.None; }
             selectedLockers.Clear();
         }
-        private bool possiblePos(int x, int y)
+        private bool possiblePos(int x, int y, bool creating=false)
         {
             foreach (Locker lckr in dataManager.currentSheet.lockers)
             {
-                if ( selectedLabel.Text != lckr.ID.ToString() && Math.Abs(lckr.Coords[0] - x) <=39 && Math.Abs(lckr.Coords[1] - y) <= 89) { return false; }
+                if ( (selectedLabel.Text != lckr.ID.ToString() || creating) && Math.Abs(lckr.Coords[0] - x) <=39 && Math.Abs(lckr.Coords[1] - y) <= 89) { return false; }
             }
 
             return true;
@@ -370,11 +393,8 @@ namespace LockerRoom_Manager
         private void createNewLocker()
         {
             if (dataManager.LockerSheets.Count < 1) { return; }
-            if (possiblePos(0, 0))
-            {
-                Locker newLocker = dataManager.CreateLocker(new int[] {0,0});
-                this.printNewLocker(newLocker.ID,newLocker.Coords, true);
-            }
+            Locker newLocker = dataManager.CreateLocker(new int[] { 0, 0 });
+            this.printNewLocker(newLocker.ID, newLocker.Coords, true);
         }
 
         private void exportFile(string path)
@@ -437,15 +457,36 @@ namespace LockerRoom_Manager
         bool MouseHold = false;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (MouseHold) { this.Location = new System.Drawing.Point(LastObjectCoords.X - (CursorMouseCoords.X - System.Windows.Forms.Cursor.Position.X), LastObjectCoords.Y - (CursorMouseCoords.Y - System.Windows.Forms.Cursor.Position.Y)); }
-            else if(MouseHoldLocker) {
-                if (Control.MouseButtons != MouseButtons.Left)
+            if (newLockerMode)
+            {
+                System.Drawing.Point tempP = panel1.PointToClient(System.Windows.Forms.Cursor.Position);
+                int[] tempPos = { (int)((tempP.X / 10) * 10), (int)((tempP.Y / 10) * 10) };
+                if (tempPos[0] < 0) { tempPos[0] = 0; }
+                if (tempPos[1] < 0) { tempPos[1] = 0; }
+                NewLockerPictureB.Location = new System.Drawing.Point(tempPos[0], tempPos[1]);
+
+                if (Control.MouseButtons == MouseButtons.Left && tempP.X > 0 && tempP.X > 0 && possiblePos(tempPos[0], tempPos[1], true))
                 {
-                    locker_MouseUp();
-                    return;
+                    possiblePos(tempPos[0], tempPos[1]);
+                    Locker newLocker = dataManager.CreateLocker(tempPos);
+                    this.printNewLocker(newLocker.ID, newLocker.Coords, true);
+                    nameBox_TextChanged(null, null);
                 }
-                selectedLocker.Location = getCoordsOfLocker();
-                selectedLabel.Location = new System.Drawing.Point(selectedLocker.Location.X + 8, selectedLocker.Location.Y + 60);
+
+            }
+            else
+            {
+                if (MouseHold) { this.Location = new System.Drawing.Point(LastObjectCoords.X - (CursorMouseCoords.X - System.Windows.Forms.Cursor.Position.X), LastObjectCoords.Y - (CursorMouseCoords.Y - System.Windows.Forms.Cursor.Position.Y)); }
+                else if (MouseHoldLocker)
+                {
+                    if (Control.MouseButtons != MouseButtons.Left)
+                    {
+                        locker_MouseUp();
+                        return;
+                    }
+                    selectedLocker.Location = getCoordsOfLocker();
+                    selectedLabel.Location = new System.Drawing.Point(selectedLocker.Location.X + 8, selectedLocker.Location.Y + 60);
+                }
             }
         }
 

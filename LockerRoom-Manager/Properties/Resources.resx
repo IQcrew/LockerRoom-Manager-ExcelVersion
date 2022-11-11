@@ -124,6 +124,9 @@
   <data name="exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="lockerTransparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>src\lockerTransparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="locker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\locker.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,11 +136,14 @@
   <data name="window-close-64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\window-close-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PinClipart.com_crystal-clip-art_882904" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>src\PinClipart.com_crystal-clip-art_882904.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="minimize_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>src\minimize_window.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pngkit_white-oval-png_885453" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>src\pngkit_white-oval-png_885453.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="lockerStroke" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>src\lockerStroke.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="export-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>src\export-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="free-exit-icon-2860-thumb1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\free-exit-icon-2860-thumb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,17 +151,17 @@
   <data name="openLocker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\openLocker.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="lockerTransparent1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>src\lockerTransparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="import-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\import-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon-password-251" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="icon-password-25" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\icon-password-25.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="x-close-icon-white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\x-close-icon-white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="minimize_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>src\minimize_window.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="testjpg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\testjpg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,8 +172,14 @@
   <data name="free-exit-icon-2860-thumb2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\free-exit-icon-2860-thumb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon-password-25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="icon-password-251" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\icon-password-25.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PinClipart.com_crystal-clip-art_882904" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>src\PinClipart.com_crystal-clip-art_882904.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pngkit_white-oval-png_885453" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>src\pngkit_white-oval-png_885453.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="free-exit-icon-2860-thumb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\free-exit-icon-2860-thumb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,7 +187,7 @@
   <data name="140351" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>src\140351.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="export-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>src\export-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BGpattern" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>src\BGpattern.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

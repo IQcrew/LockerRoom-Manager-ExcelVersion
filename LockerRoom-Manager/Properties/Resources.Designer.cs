@@ -73,6 +73,16 @@ namespace LockerRoom_Manager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BGpattern {
+            get {
+                object obj = ResourceManager.GetObject("BGpattern", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap closeLocker {
             get {
                 object obj = ResourceManager.GetObject("closeLocker", resourceCulture);
@@ -166,6 +176,36 @@ namespace LockerRoom_Manager.Properties {
         internal static System.Drawing.Bitmap locker {
             get {
                 object obj = ResourceManager.GetObject("locker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lockerStroke {
+            get {
+                object obj = ResourceManager.GetObject("lockerStroke", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lockerTransparent {
+            get {
+                object obj = ResourceManager.GetObject("lockerTransparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lockerTransparent1 {
+            get {
+                object obj = ResourceManager.GetObject("lockerTransparent1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
