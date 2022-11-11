@@ -189,9 +189,12 @@ namespace LockerRoom_Manager
 
         private void adminWindow_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {    
-            if(openFile != "" && e.Control && e.KeyCode == Keys.S)
+            if(e.Control && e.KeyCode == Keys.S)
             {
-                exportFile(openFile);
+                if (openFile != "")
+                    exportFile(openFile);
+                else if(dataManager.LockerSheets.Count > 0)
+                    ExportFile_Click(null, null);
             }
         }
         private void ExportFile_Click(object sender, EventArgs e)
