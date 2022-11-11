@@ -132,8 +132,12 @@ namespace LockerRoom_Manager
             this.clearLockersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deteleLockersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deselectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileCtrlSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.clearLockerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileCtrlSToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.windowCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.saveFileCtrlSToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -143,6 +147,7 @@ namespace LockerRoom_Manager
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.multipleSelection.SuspendLayout();
             this.searchMenu.SuspendLayout();
+            this.windowCMS.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -261,7 +266,7 @@ namespace LockerRoom_Manager
             this.ImportBackup.TabIndex = 43;
             this.ImportBackup.Text = "Import file";
             this.ImportBackup.UseVisualStyleBackColor = false;
-            this.ImportBackup.Click += new System.EventHandler(this.ImportBackup_Click);
+            this.ImportBackup.Click += new System.EventHandler(this.ImportFile_Click);
             // 
             // ExportBackup
             // 
@@ -275,7 +280,7 @@ namespace LockerRoom_Manager
             this.ExportBackup.TabIndex = 44;
             this.ExportBackup.Text = "Export file";
             this.ExportBackup.UseVisualStyleBackColor = false;
-            this.ExportBackup.Click += new System.EventHandler(this.ExportBackup_Click);
+            this.ExportBackup.Click += new System.EventHandler(this.ExportFile_Click);
             // 
             // pictureBox7
             // 
@@ -410,42 +415,72 @@ namespace LockerRoom_Manager
             this.multipleSelection.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearLockersToolStripMenuItem,
             this.deteleLockersToolStripMenuItem,
-            this.deselectToolStripMenuItem});
+            this.deselectToolStripMenuItem,
+            this.saveFileCtrlSToolStripMenuItem});
             this.multipleSelection.Name = "multipleSelection";
-            this.multipleSelection.Size = new System.Drawing.Size(148, 70);
+            this.multipleSelection.Size = new System.Drawing.Size(160, 92);
             this.multipleSelection.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.multipleSelection_ItemClicked);
             // 
             // clearLockersToolStripMenuItem
             // 
             this.clearLockersToolStripMenuItem.Name = "clearLockersToolStripMenuItem";
-            this.clearLockersToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.clearLockersToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.clearLockersToolStripMenuItem.Text = "Clear lockers";
             // 
             // deteleLockersToolStripMenuItem
             // 
             this.deteleLockersToolStripMenuItem.Name = "deteleLockersToolStripMenuItem";
-            this.deteleLockersToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.deteleLockersToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.deteleLockersToolStripMenuItem.Text = "Delete lockers";
             // 
             // deselectToolStripMenuItem
             // 
             this.deselectToolStripMenuItem.Name = "deselectToolStripMenuItem";
-            this.deselectToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.deselectToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.deselectToolStripMenuItem.Text = "Deselect";
+            // 
+            // saveFileCtrlSToolStripMenuItem
+            // 
+            this.saveFileCtrlSToolStripMenuItem.Name = "saveFileCtrlSToolStripMenuItem";
+            this.saveFileCtrlSToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.saveFileCtrlSToolStripMenuItem.Text = "Save file   Ctrl+S";
+            this.saveFileCtrlSToolStripMenuItem.Click += new System.EventHandler(this.saveFileCtrlSToolStripMenuItem2_Click);
             // 
             // searchMenu
             // 
             this.searchMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearLockerToolStripMenuItem});
+            this.clearLockerToolStripMenuItem,
+            this.saveFileCtrlSToolStripMenuItem1});
             this.searchMenu.Name = "searchMenu";
-            this.searchMenu.Size = new System.Drawing.Size(181, 48);
+            this.searchMenu.Size = new System.Drawing.Size(157, 48);
             // 
             // clearLockerToolStripMenuItem
             // 
             this.clearLockerToolStripMenuItem.Name = "clearLockerToolStripMenuItem";
-            this.clearLockerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearLockerToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.clearLockerToolStripMenuItem.Text = "Clear locker";
             this.clearLockerToolStripMenuItem.Click += new System.EventHandler(this.clearLockerToolStripMenuItem_Click);
+            // 
+            // saveFileCtrlSToolStripMenuItem1
+            // 
+            this.saveFileCtrlSToolStripMenuItem1.Name = "saveFileCtrlSToolStripMenuItem1";
+            this.saveFileCtrlSToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
+            this.saveFileCtrlSToolStripMenuItem1.Text = "Save file  Ctrl+S";
+            this.saveFileCtrlSToolStripMenuItem1.Click += new System.EventHandler(this.saveFileCtrlSToolStripMenuItem2_Click);
+            // 
+            // windowCMS
+            // 
+            this.windowCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveFileCtrlSToolStripMenuItem2});
+            this.windowCMS.Name = "windowCMS";
+            this.windowCMS.Size = new System.Drawing.Size(159, 26);
+            // 
+            // saveFileCtrlSToolStripMenuItem2
+            // 
+            this.saveFileCtrlSToolStripMenuItem2.Name = "saveFileCtrlSToolStripMenuItem2";
+            this.saveFileCtrlSToolStripMenuItem2.Size = new System.Drawing.Size(158, 22);
+            this.saveFileCtrlSToolStripMenuItem2.Text = "Save File  Ctrl+S";
+            this.saveFileCtrlSToolStripMenuItem2.Click += new System.EventHandler(this.saveFileCtrlSToolStripMenuItem2_Click);
             // 
             // adminWindow
             // 
@@ -477,6 +512,8 @@ namespace LockerRoom_Manager
             this.Name = "adminWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.adminWindow_KeyDown);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.adminWindow_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
@@ -486,6 +523,7 @@ namespace LockerRoom_Manager
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.multipleSelection.ResumeLayout(false);
             this.searchMenu.ResumeLayout(false);
+            this.windowCMS.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -523,5 +561,9 @@ namespace LockerRoom_Manager
         private System.Windows.Forms.ToolStripMenuItem deselectToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip searchMenu;
         private System.Windows.Forms.ToolStripMenuItem clearLockerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveFileCtrlSToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveFileCtrlSToolStripMenuItem1;
+        private System.Windows.Forms.ContextMenuStrip windowCMS;
+        private System.Windows.Forms.ToolStripMenuItem saveFileCtrlSToolStripMenuItem2;
     }
 }

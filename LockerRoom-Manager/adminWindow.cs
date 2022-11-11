@@ -20,7 +20,7 @@ namespace LockerRoom_Manager
 {
     public partial class adminWindow : Form
     {
-        
+        string openFile = "";
         bool MouseHoldLocker = false;
         System.Drawing.Point CursorMouseCoords = new System.Drawing.Point();
         System.Drawing.Point LastObjectCoords = new System.Drawing.Point();
@@ -41,7 +41,7 @@ namespace LockerRoom_Manager
             openFileDialog1.AddExtension = true;
 
 
-
+            this.KeyPreview = true;
         }
 
         #region events
@@ -142,7 +142,7 @@ namespace LockerRoom_Manager
                 }
             }
         }
-        private void ImportBackup_Click(object sender, EventArgs e)
+        private void ImportFile_Click(object sender, EventArgs e)
         {
             try
             {
@@ -173,6 +173,7 @@ namespace LockerRoom_Manager
                     dataManager.currentSheetIndex = 0;
                     classBox.SelectedItem = dataManager.LockerSheets[0].Name;
                     nameBox_TextChanged(null, null);
+                    openFile = openFileDialog1.FileName;
                 }
                 else
                 {
@@ -186,58 +187,17 @@ namespace LockerRoom_Manager
             }
         }
 
-        private void ExportBackup_Click(object sender, EventArgs e)
-        {
-            try
+        private void adminWindow_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {    
+            if(openFile != "" && e.Control && e.KeyCode == Keys.S)
             {
-                if(saveFileDialog1.ShowDialog() != DialogResult.OK) { return; }
-                foreach (var ls in dataManager.LockerSheets)
-                {
-                    ls.lockers = ls.lockers.OrderBy(z => z.ID).ToList();
-                }
-                var package = new ExcelPackage();
-
-
-                var wb = package.Workbook;
-                for (int x = 0; x < dataManager.LockerSheets.Count; x++)
-                {
-
-
-                    wb.Worksheets.Add(dataManager.LockerSheets[x].Name);
-                    var ws = wb.Worksheets[x];
-
-                    ws.Cells[1, 1].Value = "Locker_Room_File";
-                    ws.Cells[2, 1].Value = dataManager.LockerSheets[x].Name;
-                    ws.Cells[3, 1].Value = "Čislo";
-                    ws.Cells[3, 2].Value = "Meno";
-                    ws.Cells[3, 3].Value = "Trieda";
-                    ws.Cells[3, 4].Value = "Suradnice";
-
-                    ws.Cells[1, 1, 3, 7].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                    ws.Cells[1, 1, 3, 7].Style.Font.Bold = true;
-
-                    ws.Cells["A1:D1"].Merge = true;
-                    ws.Cells["A1:D1"].Style.Locked = true;
-                    ws.Cells["A2:D2"].Merge = true;
-                    ws.Cells["A2:D2"].Style.Locked = true;
-                    ws.Columns[2].Width = 25;
-                    ws.Columns[4].Width = 11;
-
-                    for (int i = 0; i < dataManager.LockerSheets[x].lockers.Count; i++)
-                    {
-                        Locker tempL = dataManager.LockerSheets[x].lockers[i];
-                        ws.Cells[i + 4, 1].Value = tempL.ID.ToString();
-                        ws.Cells[i + 4, 2].Value = tempL.NameOfHolder;
-                        ws.Cells[i + 4, 3].Value = tempL.HolderClass;
-                        ws.Cells[i + 4, 4].Value = tempL.Coords[0].ToString() + "," + tempL.Coords[1].ToString();
-                    }
-
-                }
-                package.SaveAs(saveFileDialog1.FileName);
-                
-
+                exportFile(openFile);
             }
-            catch (Exception ex){ MessageBox.Show(ex.Message); }
+        }
+        private void ExportFile_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK) { return; }
+            exportFile(saveFileDialog1.FileName);
         }
 
 
@@ -284,6 +244,7 @@ namespace LockerRoom_Manager
                 dataManager.currentSheet.Name = classBox.Text;
             }
         }
+
 
         private void panel1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -348,6 +309,14 @@ namespace LockerRoom_Manager
         {
             if (e.Button == MouseButtons.Right) { searchMenu.Show(System.Windows.Forms.Cursor.Position); }
         }
+        private void adminWindow_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right) { windowCMS.Show(System.Windows.Forms.Cursor.Position); }
+        }
+        private void saveFileCtrlSToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (openFile != "") { exportFile(openFile); }
+        }
         private void clearLockerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (var item in listBox1.SelectedItems)
@@ -405,6 +374,59 @@ namespace LockerRoom_Manager
             }
         }
 
+        private void exportFile(string path)
+        {
+            try
+            {
+                foreach (var ls in dataManager.LockerSheets)
+                {
+                    ls.lockers = ls.lockers.OrderBy(z => z.ID).ToList();
+                }
+                var package = new ExcelPackage();
+
+
+                var wb = package.Workbook;
+                for (int x = 0; x < dataManager.LockerSheets.Count; x++)
+                {
+
+
+                    wb.Worksheets.Add(dataManager.LockerSheets[x].Name);
+                    var ws = wb.Worksheets[x];
+
+                    ws.Cells[1, 1].Value = "Locker_Room_File";
+                    ws.Cells[2, 1].Value = dataManager.LockerSheets[x].Name;
+                    ws.Cells[3, 1].Value = "Čislo";
+                    ws.Cells[3, 2].Value = "Meno";
+                    ws.Cells[3, 3].Value = "Trieda";
+                    ws.Cells[3, 4].Value = "Suradnice";
+
+                    ws.Cells[1, 1, 3, 7].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    ws.Cells[1, 1, 3, 7].Style.Font.Bold = true;
+
+                    ws.Cells["A1:D1"].Merge = true;
+                    ws.Cells["A1:D1"].Style.Locked = true;
+                    ws.Cells["A2:D2"].Merge = true;
+                    ws.Cells["A2:D2"].Style.Locked = true;
+                    ws.Columns[2].Width = 25;
+                    ws.Columns[4].Width = 11;
+
+                    for (int i = 0; i < dataManager.LockerSheets[x].lockers.Count; i++)
+                    {
+                        Locker tempL = dataManager.LockerSheets[x].lockers[i];
+                        ws.Cells[i + 4, 1].Value = tempL.ID.ToString();
+                        ws.Cells[i + 4, 2].Value = tempL.NameOfHolder;
+                        ws.Cells[i + 4, 3].Value = tempL.HolderClass;
+                        ws.Cells[i + 4, 4].Value = tempL.Coords[0].ToString() + "," + tempL.Coords[1].ToString();
+                    }
+
+                }
+                package.SaveAs(path);
+
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
         #endregion
 
 
@@ -426,6 +448,7 @@ namespace LockerRoom_Manager
 
         private void pictureBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Right) { windowCMS.Show(System.Windows.Forms.Cursor.Position); return; }
             CursorMouseCoords = System.Windows.Forms.Cursor.Position;
             LastObjectCoords = Location;
             MouseHold = true;
@@ -463,15 +486,33 @@ namespace LockerRoom_Manager
 
         private void exitProgram(object sender, EventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+            switch (MessageBox.Show($"Do you want to save your work before leaving?", "Are you sure?", MessageBoxButtons.YesNoCancel))
+            {
+                case DialogResult.Yes: 
+                    if(openFile == "")
+                    {
+                        ExportFile_Click(null, null);
+                    }
+                    else
+                    {
+                        exportFile(openFile);
+                    }
+                    System.Windows.Forms.Application.Exit();
+                    break;
+                case DialogResult.No:
+                    System.Windows.Forms.Application.Exit();
+                    break;
+                case DialogResult.Cancel:
+                    return;
+            }
         }
 
         private void nameBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = e.KeyChar == '\r';
         }
-        #endregion
 
+        #endregion
 
     }
 }
