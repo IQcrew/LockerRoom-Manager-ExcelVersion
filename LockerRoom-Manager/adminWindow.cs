@@ -258,7 +258,7 @@ namespace LockerRoom_Manager
 
         private void lockerSelection_Click(object sender, EventArgs e)
         {
-            if (Control.ModifierKeys == Keys.Shift)
+            if (new Keys[] { Keys.Shift, Keys.Control }.Contains(Control.ModifierKeys))
             {
                 int lockerID = sender.GetType().ToString() == "System.Windows.Forms.PictureBox" ? Int32.Parse((sender as PictureBox).Name) : Int32.Parse((sender as System.Windows.Forms.Label).Text);
                 System.Windows.Forms.PictureBox tempPictureBox = this.getLockerPictureBox(lockerID);
@@ -279,7 +279,7 @@ namespace LockerRoom_Manager
         {
             switch (e.ClickedItem.Text)
             {
-                case "Clear lockers":
+                case "Clear selected lockers":
                     foreach (int lckrID in selectedLockers)
                     {
                         Locker tempLckr = dataManager.FindLocker(lckrID);
@@ -288,17 +288,15 @@ namespace LockerRoom_Manager
                         this.LockerState(lckrID, tempLckr.HolderClass == "" && tempLckr.NameOfHolder == "");
                     }
                     clearSelected();
-
                     break;
 
-                case "Delete lockers":
+                case "Delete selected lockers":
 
                     foreach (var item in dataManager.currentSheet.lockers.Where(x => selectedLockers.Contains(x.ID)).ToList())
                     {
                         dataManager.currentSheet.lockers.Remove(item);
                     }
                     changeLockerRoom(dataManager.currentSheetIndex);
-
                     break;
 
                 case "Deselect":
@@ -313,7 +311,6 @@ namespace LockerRoom_Manager
                         Locker newLocker = dataManager.CreateLocker(tempPos);
                         this.printNewLocker(newLocker.ID, newLocker.Coords, true);
                     }
-
                     break;
 
 
@@ -368,6 +365,7 @@ namespace LockerRoom_Manager
             dataManager.currentSheetIndex = index;
             panel1.Controls.Clear();
             this.LockersNumbers.Clear();
+            this.creteNewlockerPB();
             foreach (Locker lck in dataManager.currentSheet.lockers)
             {
                 this.printNewLocker(lck.ID, lck.Coords, lck.NameOfHolder == "" && lck.HolderClass == "");
@@ -471,6 +469,7 @@ namespace LockerRoom_Manager
                     Locker newLocker = dataManager.CreateLocker(tempPos);
                     this.printNewLocker(newLocker.ID, newLocker.Coords, true);
                     nameBox_TextChanged(null, null);
+                    NewLockerPictureB.BringToFront();
                 }
 
             }

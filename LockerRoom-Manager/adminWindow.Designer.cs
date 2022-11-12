@@ -351,13 +351,13 @@ namespace LockerRoom_Manager
             // 
             this.clearLockersToolStripMenuItem.Name = "clearLockersToolStripMenuItem";
             this.clearLockersToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.clearLockersToolStripMenuItem.Text = "Clear lockers";
+            this.clearLockersToolStripMenuItem.Text = "Clear selected lockers";
             // 
             // deteleLockersToolStripMenuItem
             // 
             this.deteleLockersToolStripMenuItem.Name = "deteleLockersToolStripMenuItem";
             this.deteleLockersToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.deteleLockersToolStripMenuItem.Text = "Delete lockers";
+            this.deteleLockersToolStripMenuItem.Text = "Delete selected lockers";
             // 
             // newLockerToolStripMenuItem
             // 
