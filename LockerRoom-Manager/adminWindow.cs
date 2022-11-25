@@ -93,7 +93,9 @@ namespace LockerRoom_Manager
         }
         private void locker_LocationChanged(object sender, EventArgs e)
         {
-            selectedLocker.BorderStyle = BorderStyle.Fixed3D;
+            if (Control.MouseButtons == MouseButtons.Left) {
+                selectedLocker.BorderStyle = BorderStyle.Fixed3D;
+            }
         }
 
 
@@ -451,15 +453,6 @@ namespace LockerRoom_Manager
         bool MouseHold = false;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            richTextBox1.Text = panel1.AutoScrollPosition.ToString();
-            try
-            {
-                foreach (var item in dataManager.currentSheet.lockers)
-                {
-                    richTextBox1.Text += $"\nn. {item.ID}   x: {item.Coords[0]}  y: {item.Coords[1]}";
-                }
-            }
-            catch { }
             if (newLockerMode)
             {
                 System.Drawing.Point tempP = panel1.PointToClient(System.Windows.Forms.Cursor.Position);
@@ -470,7 +463,6 @@ namespace LockerRoom_Manager
 
                 if (Control.MouseButtons == MouseButtons.Left && tempP.X > 0 && tempP.X > 0 && possiblePos(tempPos[0], tempPos[1], true))
                 {
-                    //textBox1.Text = $" {tempPos[0]}  {tempPos[1]}";
                     possiblePos(tempPos[0], tempPos[1]);
                     Locker newLocker = dataManager.CreateLocker(tempPos);
                     this.printNewLocker(newLocker.ID, newLocker.Coords, true);
