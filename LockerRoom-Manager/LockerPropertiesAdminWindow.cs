@@ -49,7 +49,7 @@ namespace LockerRoom_Manager
                 lckr.HolderClass = classBox.Text;
                 dataManager.UpdateLocker(lckr);
                 main.openLockerTabs.Remove(originalID);
-                main.nameBox_TextChanged(null, null);
+                main.filter_TextChanged(null, null);
                 this.Close();
             }
             else
@@ -58,7 +58,7 @@ namespace LockerRoom_Manager
                 {
                     main.clearSelected();
                     main.openLockerTabs.Remove(originalID);
-                    main.nameBox_TextChanged(null, null);
+                    main.filter_TextChanged(null, null);
                     dataManager.DeleteLocker(lckr.ID);
                     main.earseLocker(lckr.ID);
                     lckr.NameOfHolder = nameBox.Text;

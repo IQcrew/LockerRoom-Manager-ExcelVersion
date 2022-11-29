@@ -35,7 +35,7 @@ namespace LockerRoom_Manager
         {
             InitializeComponent();
             OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
-            nameBox_TextChanged(null, null);
+            filter_TextChanged(null, null);
             saveFileDialog1.Filter = "Data Files (*.xlsx)|*.xlsx";
             saveFileDialog1.AddExtension = true;
             openFileDialog1.Filter = "Data Files (*.xlsx)|*.xlsx";
@@ -46,12 +46,10 @@ namespace LockerRoom_Manager
         }
 
         #region events
-        private void button1_Click(object sender, EventArgs e)
+        private void newLockerModeButton_Click(object sender, EventArgs e)
         {
             if (dataManager.LockerSheets.Count < 1) {return; }
-            newLockerMode = !newLockerMode;
-            newLockerButton.BackColor = newLockerMode ? Color.FromArgb(255, 0, 25, 35) : Color.FromArgb(255, 0, 85, 100);
-            NewLockerPictureB.Visible = newLockerMode;
+            changeNewLockerMode(!newLockerMode);
         }
         private void locker_MouseDown(object sender,System.Windows.Forms.MouseEventArgs e)
         {
@@ -114,11 +112,11 @@ namespace LockerRoom_Manager
         }
 
 
-        private void listBox1_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void filterListBox_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             try
             {
-                int temp = Int32.Parse(listBox1.SelectedItem.ToString().Split(' ')[0]);
+                int temp = Int32.Parse(filterResutlsBox.SelectedItem.ToString().Split(' ')[0]);
                 if (openLockerTabs.Contains(temp)) { return; }
                 Form LockerPropertiesForm = new LockerPropertiesAdminWindow(temp);
                 LockerPropertiesForm.Owner = this;
@@ -128,14 +126,14 @@ namespace LockerRoom_Manager
             catch { }
         }
 
-        public void nameBox_TextChanged(object sender, EventArgs e)
+        public void filter_TextChanged(object sender, EventArgs e)
         {
             if (dataManager.LockerSheets.Count < 1) { return; }
-            listBox1.Items.Clear();
+            filterResutlsBox.Items.Clear();
             foreach (Locker item in dataManager.currentSheet.lockers)
             {
-                if ($"{item.HolderClass.ToLower()} {item.NameOfHolder.ToLower()}".Contains(nameBox.Text.ToLower())){
-                    listBox1.Items.Add(item.ID.ToString() +" - "+ item.HolderClass+" - "+item.NameOfHolder);
+                if ($"{item.HolderClass.ToLower()} {item.NameOfHolder.ToLower()}".Contains(filterBox.Text.ToLower())){
+                    filterResutlsBox.Items.Add(item.ID.ToString() +" - "+ item.HolderClass+" - "+item.NameOfHolder);
                 }
             }
         }
@@ -147,7 +145,7 @@ namespace LockerRoom_Manager
                 label1.Text = openFileDialog1.SafeFileName;
                 string backup = File.ReadAllText(openFileDialog1.FileName);
                 dataManager.LockerSheets.Clear();
-                classBox.Items.Clear();
+                chooseRoomBox.Items.Clear();
                 var package = new ExcelPackage(openFileDialog1.FileName);
                 var wb = package.Workbook;
                 for (int x = 0; x < wb.Worksheets.Count; x++)
@@ -162,14 +160,14 @@ namespace LockerRoom_Manager
                         tempLocker.HolderClass = ws.Cells[i, 3].Value.ToString();
                         tempSheet.lockers.Add(tempLocker);
                     }
-                    classBox.Items.Add(tempSheet.Name);
+                    chooseRoomBox.Items.Add(tempSheet.Name);
                     dataManager.LockerSheets.Add(tempSheet);
                 }
                 if (dataManager.LockerSheets.Count > 0)
                 {
                     dataManager.currentSheetIndex = 0;
-                    classBox.SelectedItem = dataManager.LockerSheets[0].Name;
-                    nameBox_TextChanged(null, null);
+                    chooseRoomBox.SelectedItem = dataManager.LockerSheets[0].Name;
+                    filter_TextChanged(null, null);
                     openFile = openFileDialog1.FileName;
                 }
                 else
@@ -203,15 +201,18 @@ namespace LockerRoom_Manager
         }
         private void ExportFile_Click(object sender, EventArgs e)
         {
+            changeNewLockerMode(false);
             if (saveFileDialog1.ShowDialog() != DialogResult.OK) { return; }
+            openFile = saveFileDialog1.FileName;
+            label1.Text = saveFileDialog1.FileName.Split('\\').Last();
             exportFile(saveFileDialog1.FileName);
         }
 
 
         private void classBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            changeLockerRoom(classBox.SelectedIndex);
-            nameBox_TextChanged(null, null);
+            changeLockerRoom(chooseRoomBox.SelectedIndex);
+            filter_TextChanged(null, null);
             this.creteNewlockerPB();
         }
         private void newRoom_Click(object sender, EventArgs e)
@@ -222,8 +223,8 @@ namespace LockerRoom_Manager
                 name += "_";
             }
             dataManager.LockerSheets.Add(new LockerSheet(name));
-            classBox.Items.Add(name);
-            classBox.SelectedItem = name;
+            chooseRoomBox.Items.Add(name);
+            chooseRoomBox.SelectedItem = name;
 
         }
         private void deleteRoom_Click(object sender, EventArgs e)
@@ -232,10 +233,10 @@ namespace LockerRoom_Manager
             if (MessageBox.Show( $"Do you really want to delete current locker room named {dataManager.currentSheet.Name} ?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 dataManager.LockerSheets.RemoveAt(dataManager.currentSheetIndex);
-                classBox.Items.RemoveAt(dataManager.currentSheetIndex);
+                chooseRoomBox.Items.RemoveAt(dataManager.currentSheetIndex);
                 dataManager.currentSheetIndex = dataManager.LockerSheets.Count>1 ? dataManager.currentSheetIndex-1 : 0;
                 changeLockerRoom(dataManager.currentSheetIndex);
-                classBox.SelectedIndex = dataManager.currentSheetIndex;
+                chooseRoomBox.SelectedIndex = dataManager.currentSheetIndex;
 
             }
         }
@@ -246,10 +247,10 @@ namespace LockerRoom_Manager
             if (e.KeyChar == '\r')
             {
                 e.Handled = true;
-                if (classBox.Text == "" || dataManager.LockerSheets.Any(x => x.Name == classBox.Text)){ classBox.Text = classBox.Items[dataManager.currentSheetIndex].ToString() ; return; }
-                classBox.Text = classBox.Text.Trim();
-                classBox.Items[dataManager.currentSheetIndex] = classBox.Text;
-                dataManager.currentSheet.Name = classBox.Text;
+                if (chooseRoomBox.Text == "" || dataManager.LockerSheets.Any(x => x.Name == chooseRoomBox.Text)){ chooseRoomBox.Text = chooseRoomBox.Items[dataManager.currentSheetIndex].ToString() ; return; }
+                chooseRoomBox.Text = chooseRoomBox.Text.Trim();
+                chooseRoomBox.Items[dataManager.currentSheetIndex] = chooseRoomBox.Text;
+                dataManager.currentSheet.Name = chooseRoomBox.Text;
             }
         }
 
@@ -280,6 +281,8 @@ namespace LockerRoom_Manager
 
         private void multipleSelection_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            if (dataManager.LockerSheets.Count <= 1) { return; }
+            changeNewLockerMode(false);
             switch (e.ClickedItem.Text)
             {
                 case "Clear selected lockers":
@@ -321,7 +324,7 @@ namespace LockerRoom_Manager
                     return;
             }
         }
-        private void listBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void searchBox_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right) { searchMenu.Show(System.Windows.Forms.Cursor.Position); }
         }
@@ -331,11 +334,13 @@ namespace LockerRoom_Manager
         }
         private void saveFileCtrlSToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            if (openFile != "") { exportFile(openFile); }
+            if (dataManager.LockerSheets.Count<1) { }
+            else if (openFile != "") { exportFile(openFile); }
+            else { ExportFile_Click(null, null); }
         }
         private void clearLockerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (var item in listBox1.SelectedItems)
+            foreach (var item in filterResutlsBox.SelectedItems)
             {
                 int lckrID = Int32.Parse(item.ToString().Split(' ')[0]);
                 Locker tempLckr = dataManager.FindLocker(lckrID);
@@ -343,13 +348,20 @@ namespace LockerRoom_Manager
                 tempLckr.NameOfHolder = "";
                 this.LockerState(lckrID, tempLckr.HolderClass == "" && tempLckr.NameOfHolder == "");
             }
-            nameBox_TextChanged(null, null);
+            filter_TextChanged(null, null);
         }
 
 
         #endregion
 
         #region additional methods
+
+        private void changeNewLockerMode(bool val)
+        {
+            newLockerMode = val;
+            newLockerButton.BackColor = newLockerMode ? Color.FromArgb(255, 0, 25, 35) : Color.FromArgb(255, 0, 85, 100);
+            NewLockerPictureB.Visible = newLockerMode;
+        }
 
         private System.Drawing.Point getCoordsOfLocker()  // coords limits 
         {
@@ -466,7 +478,7 @@ namespace LockerRoom_Manager
                     possiblePos(tempPos[0], tempPos[1]);
                     Locker newLocker = dataManager.CreateLocker(tempPos);
                     this.printNewLocker(newLocker.ID, newLocker.Coords, true);
-                    nameBox_TextChanged(null, null);
+                    filter_TextChanged(null, null);
                     NewLockerPictureB.BringToFront();
                 }
 
