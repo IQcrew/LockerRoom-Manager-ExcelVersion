@@ -38,7 +38,6 @@ namespace LockerRoom_Manager
             tempPictureBox.Click += new System.EventHandler(this.lockerSelection_Click);
             tempPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.locker_MouseDown);
             tempPictureBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.openLockerProperties);
-            tempPictureBox.LocationChanged += new System.EventHandler(this.locker_LocationChanged);
             tempPictureBox.Cursor = System.Windows.Forms.Cursors.SizeAll;
             tempPictureBox.Name = num.ToString();
             this.panel1.Controls.Add(tempPictureBox);
@@ -184,7 +183,7 @@ namespace LockerRoom_Manager
             this.label1.Location = new System.Drawing.Point(55, 2);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(182, 45);
+            this.label1.Size = new System.Drawing.Size(141, 35);
             this.label1.TabIndex = 11;
             this.label1.Text = "NEW PROJECT";
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -197,7 +196,7 @@ namespace LockerRoom_Manager
             this.exitButton.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.exitButton.ForeColor = System.Drawing.Color.White;
             this.exitButton.Location = new System.Drawing.Point(8, 940);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(4);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(276, 55);
             this.exitButton.TabIndex = 28;
@@ -212,7 +211,7 @@ namespace LockerRoom_Manager
             this.newLockerButton.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.newLockerButton.ForeColor = System.Drawing.Color.White;
             this.newLockerButton.Location = new System.Drawing.Point(8, 59);
-            this.newLockerButton.Margin = new System.Windows.Forms.Padding(4);
+            this.newLockerButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.newLockerButton.Name = "newLockerButton";
             this.newLockerButton.Size = new System.Drawing.Size(276, 55);
             this.newLockerButton.TabIndex = 27;
@@ -229,7 +228,7 @@ namespace LockerRoom_Manager
             this.label2.Location = new System.Drawing.Point(89, 223);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 45);
+            this.label2.Size = new System.Drawing.Size(88, 35);
             this.label2.TabIndex = 29;
             this.label2.Text = "SEARCH";
             // 
@@ -242,7 +241,7 @@ namespace LockerRoom_Manager
             this.filterBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.filterBox.ForeColor = System.Drawing.Color.Transparent;
             this.filterBox.Location = new System.Drawing.Point(8, 270);
-            this.filterBox.Margin = new System.Windows.Forms.Padding(4);
+            this.filterBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.filterBox.MaxLength = 24;
             this.filterBox.Multiline = true;
             this.filterBox.Name = "filterBox";
@@ -258,12 +257,12 @@ namespace LockerRoom_Manager
             this.filterResutlsBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.filterResutlsBox.ForeColor = System.Drawing.Color.White;
             this.filterResutlsBox.FormattingEnabled = true;
-            this.filterResutlsBox.ItemHeight = 24;
+            this.filterResutlsBox.ItemHeight = 19;
             this.filterResutlsBox.Location = new System.Drawing.Point(8, 324);
-            this.filterResutlsBox.Margin = new System.Windows.Forms.Padding(4);
+            this.filterResutlsBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.filterResutlsBox.Name = "filterResutlsBox";
             this.filterResutlsBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.filterResutlsBox.Size = new System.Drawing.Size(275, 484);
+            this.filterResutlsBox.Size = new System.Drawing.Size(275, 460);
             this.filterResutlsBox.TabIndex = 42;
             this.filterResutlsBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.filterListBox_MouseDoubleClick);
             this.filterResutlsBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.searchBox_MouseDown);
@@ -275,7 +274,7 @@ namespace LockerRoom_Manager
             this.ImportBackup.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ImportBackup.ForeColor = System.Drawing.Color.White;
             this.ImportBackup.Location = new System.Drawing.Point(8, 161);
-            this.ImportBackup.Margin = new System.Windows.Forms.Padding(4);
+            this.ImportBackup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ImportBackup.Name = "ImportBackup";
             this.ImportBackup.Size = new System.Drawing.Size(132, 41);
             this.ImportBackup.TabIndex = 43;
@@ -290,7 +289,7 @@ namespace LockerRoom_Manager
             this.ExportBackup.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ExportBackup.ForeColor = System.Drawing.Color.White;
             this.ExportBackup.Location = new System.Drawing.Point(152, 161);
-            this.ExportBackup.Margin = new System.Windows.Forms.Padding(4);
+            this.ExportBackup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ExportBackup.Name = "ExportBackup";
             this.ExportBackup.Size = new System.Drawing.Size(132, 41);
             this.ExportBackup.TabIndex = 44;
@@ -309,11 +308,11 @@ namespace LockerRoom_Manager
             this.chooseRoomBox.ForeColor = System.Drawing.Color.White;
             this.chooseRoomBox.FormattingEnabled = true;
             this.chooseRoomBox.Location = new System.Drawing.Point(8, 820);
-            this.chooseRoomBox.Margin = new System.Windows.Forms.Padding(4);
+            this.chooseRoomBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chooseRoomBox.Name = "chooseRoomBox";
-            this.chooseRoomBox.Size = new System.Drawing.Size(275, 49);
+            this.chooseRoomBox.Size = new System.Drawing.Size(275, 41);
             this.chooseRoomBox.TabIndex = 48;
-            this.chooseRoomBox.SelectedIndexChanged += new System.EventHandler(this.classBox_SelectedIndexChanged);
+            this.chooseRoomBox.SelectedIndexChanged += new System.EventHandler(this.lockerRoom_SelectedIndexChanged);
             this.chooseRoomBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.classBox_KeyPress);
             // 
             // deleteRoom
@@ -323,7 +322,7 @@ namespace LockerRoom_Manager
             this.deleteRoom.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.deleteRoom.ForeColor = System.Drawing.Color.White;
             this.deleteRoom.Location = new System.Drawing.Point(8, 878);
-            this.deleteRoom.Margin = new System.Windows.Forms.Padding(4);
+            this.deleteRoom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.deleteRoom.Name = "deleteRoom";
             this.deleteRoom.Size = new System.Drawing.Size(132, 55);
             this.deleteRoom.TabIndex = 49;
@@ -338,7 +337,7 @@ namespace LockerRoom_Manager
             this.newRoom.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.newRoom.ForeColor = System.Drawing.Color.White;
             this.newRoom.Location = new System.Drawing.Point(152, 878);
-            this.newRoom.Margin = new System.Windows.Forms.Padding(4);
+            this.newRoom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.newRoom.Name = "newRoom";
             this.newRoom.Size = new System.Drawing.Size(132, 55);
             this.newRoom.TabIndex = 50;
@@ -356,38 +355,38 @@ namespace LockerRoom_Manager
             this.saveFileCtrlSToolStripMenuItem,
             this.deselectToolStripMenuItem});
             this.multipleSelection.Name = "multipleSelection";
-            this.multipleSelection.Size = new System.Drawing.Size(232, 124);
+            this.multipleSelection.Size = new System.Drawing.Size(194, 114);
             this.multipleSelection.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.multipleSelection_ItemClicked);
             // 
             // clearLockersToolStripMenuItem
             // 
             this.clearLockersToolStripMenuItem.Name = "clearLockersToolStripMenuItem";
-            this.clearLockersToolStripMenuItem.Size = new System.Drawing.Size(231, 24);
+            this.clearLockersToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.clearLockersToolStripMenuItem.Text = "Clear selected lockers";
             // 
             // deteleLockersToolStripMenuItem
             // 
             this.deteleLockersToolStripMenuItem.Name = "deteleLockersToolStripMenuItem";
-            this.deteleLockersToolStripMenuItem.Size = new System.Drawing.Size(231, 24);
+            this.deteleLockersToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.deteleLockersToolStripMenuItem.Text = "Delete selected lockers";
             // 
             // newLockerToolStripMenuItem
             // 
             this.newLockerToolStripMenuItem.Name = "newLockerToolStripMenuItem";
-            this.newLockerToolStripMenuItem.Size = new System.Drawing.Size(231, 24);
+            this.newLockerToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.newLockerToolStripMenuItem.Text = "New locker";
             // 
             // saveFileCtrlSToolStripMenuItem
             // 
             this.saveFileCtrlSToolStripMenuItem.Name = "saveFileCtrlSToolStripMenuItem";
-            this.saveFileCtrlSToolStripMenuItem.Size = new System.Drawing.Size(231, 24);
+            this.saveFileCtrlSToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.saveFileCtrlSToolStripMenuItem.Text = "Save file   Ctrl+S";
             this.saveFileCtrlSToolStripMenuItem.Click += new System.EventHandler(this.saveFileCtrlSToolStripMenuItem2_Click);
             // 
             // deselectToolStripMenuItem
             // 
             this.deselectToolStripMenuItem.Name = "deselectToolStripMenuItem";
-            this.deselectToolStripMenuItem.Size = new System.Drawing.Size(231, 24);
+            this.deselectToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.deselectToolStripMenuItem.Text = "Deselect";
             // 
             // searchMenu
@@ -397,19 +396,19 @@ namespace LockerRoom_Manager
             this.clearLockerToolStripMenuItem,
             this.saveFileCtrlSToolStripMenuItem1});
             this.searchMenu.Name = "searchMenu";
-            this.searchMenu.Size = new System.Drawing.Size(184, 52);
+            this.searchMenu.Size = new System.Drawing.Size(157, 48);
             // 
             // clearLockerToolStripMenuItem
             // 
             this.clearLockerToolStripMenuItem.Name = "clearLockerToolStripMenuItem";
-            this.clearLockerToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.clearLockerToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.clearLockerToolStripMenuItem.Text = "Clear locker";
             this.clearLockerToolStripMenuItem.Click += new System.EventHandler(this.clearLockerToolStripMenuItem_Click);
             // 
             // saveFileCtrlSToolStripMenuItem1
             // 
             this.saveFileCtrlSToolStripMenuItem1.Name = "saveFileCtrlSToolStripMenuItem1";
-            this.saveFileCtrlSToolStripMenuItem1.Size = new System.Drawing.Size(183, 24);
+            this.saveFileCtrlSToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
             this.saveFileCtrlSToolStripMenuItem1.Text = "Save file  Ctrl+S";
             this.saveFileCtrlSToolStripMenuItem1.Click += new System.EventHandler(this.saveFileCtrlSToolStripMenuItem2_Click);
             // 
@@ -419,12 +418,12 @@ namespace LockerRoom_Manager
             this.windowCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveFileCtrlSToolStripMenuItem2});
             this.windowCMS.Name = "windowCMS";
-            this.windowCMS.Size = new System.Drawing.Size(186, 28);
+            this.windowCMS.Size = new System.Drawing.Size(159, 26);
             // 
             // saveFileCtrlSToolStripMenuItem2
             // 
             this.saveFileCtrlSToolStripMenuItem2.Name = "saveFileCtrlSToolStripMenuItem2";
-            this.saveFileCtrlSToolStripMenuItem2.Size = new System.Drawing.Size(185, 24);
+            this.saveFileCtrlSToolStripMenuItem2.Size = new System.Drawing.Size(158, 22);
             this.saveFileCtrlSToolStripMenuItem2.Text = "Save File  Ctrl+S";
             this.saveFileCtrlSToolStripMenuItem2.Click += new System.EventHandler(this.saveFileCtrlSToolStripMenuItem2_Click);
             // 
@@ -433,7 +432,7 @@ namespace LockerRoom_Manager
             this.pictureBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(59)))), ((int)(((byte)(70)))));
             this.pictureBox7.Image = global::LockerRoom_Manager.Properties.Resources.export_icon;
             this.pictureBox7.Location = new System.Drawing.Point(199, 122);
-            this.pictureBox7.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(35, 32);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -445,7 +444,7 @@ namespace LockerRoom_Manager
             this.pictureBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(59)))), ((int)(((byte)(70)))));
             this.pictureBox6.Image = global::LockerRoom_Manager.Properties.Resources.import_icon;
             this.pictureBox6.Location = new System.Drawing.Point(61, 122);
-            this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(35, 32);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -459,7 +458,7 @@ namespace LockerRoom_Manager
             this.panel1.Controls.Add(this.NewLockerPictureB);
             this.panel1.ForeColor = System.Drawing.Color.Snow;
             this.panel1.Location = new System.Drawing.Point(292, 59);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1638, 936);
             this.panel1.TabIndex = 12;
@@ -470,7 +469,7 @@ namespace LockerRoom_Manager
             this.NewLockerPictureB.BackColor = System.Drawing.Color.Transparent;
             this.NewLockerPictureB.Image = global::LockerRoom_Manager.Properties.Resources.locker;
             this.NewLockerPictureB.Location = new System.Drawing.Point(0, 0);
-            this.NewLockerPictureB.Margin = new System.Windows.Forms.Padding(4);
+            this.NewLockerPictureB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.NewLockerPictureB.Name = "NewLockerPictureB";
             this.NewLockerPictureB.Size = new System.Drawing.Size(38, 89);
             this.NewLockerPictureB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -483,7 +482,7 @@ namespace LockerRoom_Manager
             this.pictureBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.pictureBox5.Image = global::LockerRoom_Manager.Properties.Resources._140351;
             this.pictureBox5.Location = new System.Drawing.Point(13, 10);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(33, 31);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -496,7 +495,7 @@ namespace LockerRoom_Manager
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(27)))), ((int)(((byte)(36)))));
             this.pictureBox4.Location = new System.Drawing.Point(-3, 48);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(2003, 4);
             this.pictureBox4.TabIndex = 8;
@@ -507,7 +506,7 @@ namespace LockerRoom_Manager
             this.pictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.pictureBox3.Image = global::LockerRoom_Manager.Properties.Resources.x_close_icon_white;
             this.pictureBox3.Location = new System.Drawing.Point(1909, 2);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(27, 25);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -522,7 +521,7 @@ namespace LockerRoom_Manager
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.pictureBox2.Image = global::LockerRoom_Manager.Properties.Resources.winfo_icon_minimize_64;
             this.pictureBox2.Location = new System.Drawing.Point(1873, 2);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(27, 25);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -536,7 +535,7 @@ namespace LockerRoom_Manager
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.pictureBox1.Location = new System.Drawing.Point(-3, -1);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1983, 53);
             this.pictureBox1.TabIndex = 5;
@@ -571,7 +570,7 @@ namespace LockerRoom_Manager
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "adminWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
