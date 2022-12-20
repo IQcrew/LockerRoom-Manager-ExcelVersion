@@ -67,14 +67,12 @@ namespace LockerRoom_Manager
             }
             selectedLocker.BringToFront();
             selectedLabel.BringToFront();
-            selectedLocker.BorderStyle = BorderStyle.Fixed3D;
             CursorMouseCoords = System.Windows.Forms.Cursor.Position;
             LastObjectCoords = selectedLocker.Location;
             MouseHoldLocker = true;
         }
         private void locker_MouseUp()
         {
-            if (!selectedLockers.Contains(Int32.Parse(selectedLocker.Name))) { selectedLocker.BorderStyle = BorderStyle.None; }
             MouseHoldLocker = false;
             if(selectedLocker.Location == LastObjectCoords) { return; }
             if (possiblePos(selectedLocker.Location.X, selectedLocker.Location.Y))
@@ -87,7 +85,7 @@ namespace LockerRoom_Manager
             else
             {
                 selectedLocker.Location = LastObjectCoords;
-                selectedLabel.Location = new System.Drawing.Point(selectedLocker.Location.X + 8, selectedLocker.Location.Y + 60);
+                selectedLabel.Location = new System.Drawing.Point(selectedLocker.Location.X + 5, selectedLocker.Location.Y + 60);
             }
             selectedLocker = new PictureBox();
 
@@ -304,11 +302,11 @@ namespace LockerRoom_Manager
                     break;
 
                 case "Delete selected lockers":
-                    foreach (var item in dataManager.currentSheet.lockers.Where(x => selectedLockers.Contains(x.ID)).ToList())
+                    foreach (Locker item in dataManager.currentSheet.lockers.Where(x => selectedLockers.Contains(x.ID)).ToList())
                     {
+                        this.earseLocker(item.ID);
                         dataManager.currentSheet.lockers.Remove(item);
                     }
-                    changeLockerRoom(dataManager.currentSheetIndex);
                     break;
 
                 case "Deselect":
@@ -320,7 +318,7 @@ namespace LockerRoom_Manager
                     int[] tempPos = { (int)((Math.Max(0, newLockerPosClick.X) / 10) * 10) - (10 - panel1.AutoScrollPosition.X % 10), (int)((Math.Max(0, newLockerPosClick.Y) / 10) * 10) - (10 - panel1.AutoScrollPosition.Y % 10) };
                     if (possiblePos(tempPos[0], tempPos[1]))
                     {
-                        Locker newLocker = dataManager.CreateLocker(new int[] { tempPos[0] + panel1.AutoScrollPosition.X, tempPos[1] + panel1.AutoScrollPosition.Y });
+                        Locker newLocker = dataManager.CreateLocker(new int[] { tempPos[0] - panel1.AutoScrollPosition.X, tempPos[1] - panel1.AutoScrollPosition.Y });
                         this.printNewLocker(newLocker.ID, tempPos, true);
                         filter_TextChanged(null, null);
                         NewLockerPictureB.BringToFront();
@@ -476,12 +474,12 @@ namespace LockerRoom_Manager
             if (newLockerMode)
             {
                 System.Drawing.Point tempP = panel1.PointToClient(System.Windows.Forms.Cursor.Position);
-                int[] tempPos = { (int)((Math.Max(0,tempP.X) / 10) * 10) - (10-  panel1.AutoScrollPosition.X % 10), (int)((Math.Max(0,tempP.Y) / 10) * 10) - (10-panel1.AutoScrollPosition.Y % 10) };
+                int[] tempPos = { (int)((Math.Max(0,tempP.X) / 10) * 10) + (10- Math.Abs(panel1.AutoScrollPosition.X) % 10), (int)((Math.Max(0,tempP.Y) / 10) * 10) + (10- Math.Abs(panel1.AutoScrollPosition.Y) % 10) };
                 NewLockerPictureB.Location = new System.Drawing.Point(tempPos[0] , tempPos[1] );
 
-                if (Control.MouseButtons == MouseButtons.Left && tempP.X > 0 && tempP.X > 0 && possiblePos(tempPos[0], tempPos[1], true))
+                if (Control.MouseButtons == MouseButtons.Left && tempP.X >= 0 && tempP.Y >= 0 && possiblePos(tempPos[0], tempPos[1], true))
                 {
-                    Locker newLocker = dataManager.CreateLocker(new int[] { tempPos[0] + panel1.AutoScrollPosition.X, tempPos[1] + panel1.AutoScrollPosition.Y});
+                    Locker newLocker = dataManager.CreateLocker(new int[] { tempPos[0] - panel1.AutoScrollPosition.X, tempPos[1] - panel1.AutoScrollPosition.Y});
                     this.printNewLocker(newLocker.ID, tempPos, true);
                     filter_TextChanged(null, null);
                     NewLockerPictureB.BringToFront();
@@ -501,7 +499,7 @@ namespace LockerRoom_Manager
                     }
                     System.Drawing.Point newPos = getCoordsOfLocker();
                     selectedLocker.Location =  new System.Drawing.Point(newPos.X + panel1.AutoScrollPosition.X, newPos.Y + panel1.AutoScrollPosition.Y);
-                    selectedLabel.Location = new System.Drawing.Point(selectedLocker.Location.X + 8, selectedLocker.Location.Y + 60);
+                    selectedLabel.Location = new System.Drawing.Point(selectedLocker.Location.X + 5, selectedLocker.Location.Y + 60);
                 }
             }
         }

@@ -47,7 +47,7 @@ namespace LockerRoom_Manager
             tempLabel.AutoSize = true;
             tempLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(161)))), ((int)(((byte)(221)))));
             tempLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            tempLabel.Location = new System.Drawing.Point(coords[0] + 8,coords[1] + 60);
+            tempLabel.Location = new System.Drawing.Point(coords[0] + 5,coords[1] + 60);
             tempLabel.Size = new System.Drawing.Size(26, 19);
             tempLabel.TabIndex = 1;
             tempLabel.Click += new System.EventHandler(this.lockerSelection_Click);
