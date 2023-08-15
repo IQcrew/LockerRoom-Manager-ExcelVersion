@@ -5,7 +5,7 @@ This project was made using the Windows Forms from .NET Framework. It uses .xlsx
 
 ## Shortcuts
 - **Ctrl+S** = Save
-- **Esc** = Escape new locker room mode
+- **Esc** = Escape new locker mode
 - **Ctrl/Shift + Click on locker** (even in filter) = Select locker
 - **Delete** = Delete selected lockers
 
