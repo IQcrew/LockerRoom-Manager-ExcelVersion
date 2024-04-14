@@ -41,6 +41,8 @@ namespace LockerRoom_Manager
             saveFileDialog1.AddExtension = true;
             openFileDialog1.Filter = "Data Files (*.xlsx)|*.xlsx";
             openFileDialog1.AddExtension = true;
+            openFileDialog2.Filter = "Data Files (*.csv)|*.csv";
+            openFileDialog2.AddExtension = true;
 
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.KeyPreview = true;
@@ -356,7 +358,39 @@ namespace LockerRoom_Manager
             }
             filter_TextChanged(null, null);
         }
+        private void loadCSVstudents_Click(object sender, EventArgs e)
+        {
+            if (dataManager.LockerSheets.Count < 1) { }
+            try
+            {
+                if (openFileDialog2.ShowDialog() != DialogResult.OK) { return; }
+                string[] data = File.ReadAllText(openFileDialog2.FileName).Split('\n');
+                int dataCount = data.Length;
+                int idx = 0;
+                bool overflow = true;
+                foreach (var item in dataManager.currentSheet.lockers)
+                {
+                    if(idx>= dataCount) { overflow = false; lockerRoom_SelectedIndexChanged(null, null) ; break; }
+                    if(item.NameOfHolder == "" && item.HolderClass == "")
+                    {
+                        if(data[idx] != "")
+                        {
+                        string[] temp = data[idx].Split(';');
+                        item.HolderClass = temp[0];
+                        item.NameOfHolder = $"{temp[2]} {temp[1]}";
+                        }
+                        idx++;
+                    }
+                }
+                if(overflow)
+                {
+                    MessageBox.Show("Not enough lockers for new students");
+                }
+                
 
+            }
+            catch { }
+        }
 
         #endregion
 

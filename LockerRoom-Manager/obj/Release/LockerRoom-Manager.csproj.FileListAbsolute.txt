@@ -14,13 +14,12 @@ C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-M
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\bin\Release\Microsoft.Threading.Tasks.Extensions.xml
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.xml
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRoom-Manager.csproj.AssemblyReference.cache
-C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRoom-Manager.csproj.SuggestedBindingRedirects.cache
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRoom-Manager.csproj.ResolveComReference.cache
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRoom_Manager.adminWindow.resources
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRoom_Manager.LockerPropertiesAdminWindow.resources
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRoom_Manager.Properties.Resources.resources
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRoom-Manager.csproj.GenerateResource.cache
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRoom-Manager.csproj.CoreCompileInputs.cache
-C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRoom-Manager.csproj.CopyComplete
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRoom-Manager.exe
 C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRoom-Manager.pdb
+C:\IT\Programovanie_amater\projects\LockerRoom-Manager-ExcelVersion\LockerRoom-Manager\obj\Release\LockerRo.1DF9E3A0.Up2Date
